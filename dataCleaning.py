@@ -1,3 +1,5 @@
+from datetime import date
+
 import numpy as np
 import pandas as pd
 import os
@@ -26,9 +28,10 @@ def clean_dataset(dataset_name):
         jwi_logger.info("Starting cleaning process of dataset: %s", dataset_name)
 
         dataset = pd.read_csv(path.join(project_path + "/dataset", dataset_name))
-
+        dataset= deleteDotZero(dataset)
         dataset = drop_missing_values(dataset)
         dataset = drop_unused_columns(dataset)
+        print(dataset.dtypes)
         return dataset
 
     except Exception as error:
@@ -56,3 +59,7 @@ def change_columns_name(dataset):
 def merge_datasets(datasets):
     ds = pd.concat(datasets)
     ds.to_csv("complete_dataset.csv", index=False)
+
+def deleteDotZero(dataset):
+  dataset['release_year']=dataset['release_year'].astype(int)
+  return dataset

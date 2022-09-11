@@ -1,5 +1,4 @@
 - Cambiare il nome della colonna country in qualcosa di piú significativo ( che rappresenti il fatto che quel campo dice che i film sono girati in piú paesi diversi e quali)
 - Modificare la colonna rating in qualcosa di umanamente comprensibile
-- Togliere il .0 alla fine di tutte le date della colonna release_year
 - Aggiungere la colonna di "presente in" per indicare su quale sito di streaming é presente il film
 - Trovare un modo di mergiare le righe contenenti lo stesso film, preoccupandosi di scrivere anche in quali piattaforme era presente

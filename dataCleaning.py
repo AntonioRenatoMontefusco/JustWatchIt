@@ -5,6 +5,7 @@ import pandas as pd
 import os
 from os import path, listdir
 import JWILogger
+from mongo_connection import mongo_connection, initialize_db
 
 jwi_logger = JWILogger.get_jwi_logger(__name__)
 
@@ -16,7 +17,9 @@ def main_proc():
     for s in listdir(project_path + "/dataset"):
         ds = clean_dataset(s)
         datasets.append(ds)
-    merge_datasets(datasets)
+    dataset = merge_datasets(datasets)
+    coll = mongo_connection()
+    initialize_db(dataset, coll)
     return 'Hello World!'
 
 
@@ -30,8 +33,8 @@ def clean_dataset(dataset_name):
         dataset = drop_unused_columns(dataset)
         dataset = delete_dot_zero(dataset)
         dataset = create_column(dataset, dataset_name)
-
-        print(dataset.dtypes)
+        dataset = change_columns_name(dataset)
+        dataset = modify_rating(dataset)
         return dataset
 
     except Exception as error:
@@ -56,11 +59,16 @@ def drop_unused_columns(dataset):
 
 def change_columns_name(dataset):
     dataset.rename(columns={'listed_in': 'genres'}, inplace=True)
+    dataset.rename(columns={'country': 'locations'}, inplace=True)
+
+    return dataset
 
 
 def merge_datasets(datasets):
     ds = pd.concat(datasets)
+    ds = test_dup(ds)
     ds.to_csv("complete_dataset.csv", index=False)
+    return ds
 
 
 def delete_dot_zero(dataset):
@@ -69,7 +77,7 @@ def delete_dot_zero(dataset):
 
 
 def create_column(dataset, dataset_name):
-
+    # Creazione della colonna present_in che aiuta a capire dove trovare un film
     platform = ''
     if 'amazon' in dataset_name:
         platform = 'Amazon Prime Video'
@@ -81,4 +89,36 @@ def create_column(dataset, dataset_name):
         platform = 'Netflix'
 
     dataset.insert(11, 'present_in', platform)
+    return dataset
+
+
+def test_dup(dataset):
+    agg = {'title': 'first', 'present_in': 'sum'}
+    dataset.groupby(dataset['title']).aggregate(agg)
+    return dataset
+
+
+def modify_rating(dataset):
+    for index, row in dataset.iterrows():
+        if "G" in row['rating']:
+            dataset.loc[index, 'rating'] = "G - General"
+        elif "PG" in row['rating']:
+            dataset.loc[index, 'rating'] = "PG - Parental Guidance"
+        elif "PG-13" in row['rating']:
+            dataset.loc[index, 'rating'] = "PG-13 - Parental Guidance Under 13"
+        elif "R" in row['rating']:
+            dataset.loc[index, 'rating'] = "R - Parental Guidance Under 17"
+        elif "NC-17" in row['rating']:
+            dataset.loc[index, 'rating'] = "Under 17 Not Admitted"
+        elif "TV_MA" in row['rating']:
+            dataset.loc[index, 'rating'] = "Under 17 Not Admitted"
+        elif "TV-Y" in row['rating']:
+            dataset.loc[index, 'rating'] = "G - General"
+        elif "TV-Y7" in row['rating']:
+            dataset.loc[index, 'rating'] = "TV_Y7 - Children Over 11"
+        elif "ALL" in row['rating']:
+            dataset.loc[index, 'rating'] = "G - General"
+        elif "+" not in row['rating']:
+            dataset.loc[index, 'rating'] = "Not Rated"
+
     return dataset

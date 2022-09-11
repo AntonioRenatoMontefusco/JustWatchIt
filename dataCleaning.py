@@ -10,8 +10,6 @@ jwi_logger = JWILogger.get_jwi_logger(__name__)
 
 project_path = os.getcwd()
 
-COLUMNS_NUMBER = 12
-
 
 def main_proc():
     datasets = []
@@ -28,9 +26,11 @@ def clean_dataset(dataset_name):
         jwi_logger.info("Starting cleaning process of dataset: %s", dataset_name)
 
         dataset = pd.read_csv(path.join(project_path + "/dataset", dataset_name))
-        dataset= deleteDotZero(dataset)
         dataset = drop_missing_values(dataset)
         dataset = drop_unused_columns(dataset)
+        dataset = delete_dot_zero(dataset)
+        dataset = create_column(dataset, dataset_name)
+
         print(dataset.dtypes)
         return dataset
 
@@ -53,13 +53,32 @@ def drop_unused_columns(dataset):
     dataset = dataset.drop(columns='show_id')
     return dataset
 
+
 def change_columns_name(dataset):
     dataset.rename(columns={'listed_in': 'genres'}, inplace=True)
+
 
 def merge_datasets(datasets):
     ds = pd.concat(datasets)
     ds.to_csv("complete_dataset.csv", index=False)
 
-def deleteDotZero(dataset):
-  dataset['release_year']=dataset['release_year'].astype(int)
-  return dataset
+
+def delete_dot_zero(dataset):
+    dataset['release_year'] = dataset['release_year'].astype(int)
+    return dataset
+
+
+def create_column(dataset, dataset_name):
+
+    platform = ''
+    if 'amazon' in dataset_name:
+        platform = 'Amazon Prime Video'
+    elif 'disney' in dataset_name:
+        platform = 'Disney +'
+    elif 'hulu' in dataset_name:
+        platform = 'Hulu'
+    elif 'netflix' in dataset_name:
+        platform = 'Netflix'
+
+    dataset.insert(11, 'present_in', platform)
+    return dataset

@@ -93,8 +93,24 @@ def create_column(dataset, dataset_name):
 
 
 def test_dup(dataset):
-    agg = {'title': 'first', 'present_in': 'sum'}
-    dataset.groupby(dataset['title']).aggregate(agg)
+    for index, row in dataset.iterrows():
+        title = row["title"]
+        dups = []
+        for index, row in dataset.iterrows():
+            if row["title"] == title:
+                dups.append({({index: row})})
+
+        if dups.__len__() > 1:
+            platforms = ''
+            for dic in dups:
+                print(dic)
+                platforms += dic[row]['present_in'] + ','
+            print(platforms)
+            new_row = dups[0]
+            new_row['present_in'] = platforms
+            for i in range(dups.__len__()):
+                dataset.drop(dups[i])
+
     return dataset
 
 

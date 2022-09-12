@@ -96,20 +96,22 @@ def test_dup(dataset):
     for index, row in dataset.iterrows():
         title = row["title"]
         dups = []
-        for index, row in dataset.iterrows():
-            if row["title"] == title:
-                dups.append({({index: row})})
+        platforms = ''
+        jwi_logger.info('Checking row %s', index)
+
+        for index_, row_ in dataset.iterrows():
+
+            if row_["title"] == title:
+                dups.append(index_)
+                platforms += row_['present_in'] + ','
 
         if dups.__len__() > 1:
-            platforms = ''
-            for dic in dups:
-                print(dic)
-                platforms += dic[row]['present_in'] + ','
-            print(platforms)
-            new_row = dups[0]
-            new_row['present_in'] = platforms
-            for i in range(dups.__len__()):
-                dataset.drop(dups[i])
+            new_row = dataset.iloc[dups[0]].copy(deep=True)
+            new_row['present_in'] = platforms[:-1]
+            for i in dups:
+                dataset.drop(i)
+
+            dataset.append(new_row)
 
     return dataset
 

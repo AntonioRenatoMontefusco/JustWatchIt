@@ -1,4 +1,5 @@
 from datetime import date
+from unittest.mock import inplace
 
 import numpy as np
 import pandas as pd
@@ -14,7 +15,7 @@ project_path = os.getcwd()
 
 def main_proc():
     datasets = []
-    for s in listdir(project_path + "/dataset"):
+    for s in listdir("test"):
         ds = clean_dataset(s)
         datasets.append(ds)
     dataset = merge_datasets(datasets)
@@ -28,7 +29,7 @@ def clean_dataset(dataset_name):
     try:
         jwi_logger.info("Starting cleaning process of dataset: %s", dataset_name)
 
-        dataset = pd.read_csv(path.join(project_path + "/dataset", dataset_name))
+        dataset = pd.read_csv(path.join(project_path + "\\test", dataset_name))
         dataset = drop_missing_values(dataset)
         dataset = drop_unused_columns(dataset)
         dataset = delete_dot_zero(dataset)
@@ -98,7 +99,7 @@ def test_dup(dataset):
         dups = []
         platforms = ''
         jwi_logger.info('Checking row %s', index)
-
+        dataset.reset_index(drop=True, inplace=True)
         for index_, row_ in dataset.iterrows():
 
             if row_["title"] == title:
@@ -108,12 +109,12 @@ def test_dup(dataset):
         if dups.__len__() > 1:
             new_row = dataset.iloc[dups[0]].copy(deep=True)
             new_row['present_in'] = platforms[:-1]
+
             for i in dups:
-                dataset.drop(i)
+               dataset.drop(index=i,inplace=True);
+        new_dataset=dataset.append(new_row);
 
-            dataset.append(new_row)
-
-    return dataset
+    return new_dataset
 
 
 def modify_rating(dataset):

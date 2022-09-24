@@ -1,10 +1,8 @@
-from datetime import date
-from unittest.mock import inplace
-
-import numpy as np
-import pandas as pd
 import os
 from os import path, listdir
+
+import pandas as pd
+
 import JWILogger
 from mongo_connection import mongo_connection, initialize_db
 
@@ -21,6 +19,7 @@ def main_proc():
     dataset = merge_datasets(datasets)
     coll = mongo_connection()
     initialize_db(dataset, coll)
+
     return 'Hello World!'
 
 
@@ -33,8 +32,8 @@ def clean_dataset(dataset_name):
         dataset = drop_missing_values(dataset)
         dataset = drop_unused_columns(dataset)
         dataset = delete_dot_zero(dataset)
-        dataset = create_column(dataset, dataset_name)
         dataset = change_columns_name(dataset)
+        dataset = create_column(dataset, dataset_name)
         dataset = modify_rating(dataset)
         return dataset
 
@@ -54,7 +53,7 @@ def drop_missing_values(dataset):
 # Funzione che elimina colonne non utili
 def drop_unused_columns(dataset):
     # Inutli, indici dei dataset originali non piú utili nel nostro caso
-    dataset = dataset.drop(columns='show_id')
+    dataset = dataset.drop(columns=['show_id', 'duration'])
     return dataset
 
 
@@ -77,6 +76,8 @@ def delete_dot_zero(dataset):
     return dataset
 
 
+
+
 def create_column(dataset, dataset_name):
     # Creazione della colonna present_in che aiuta a capire dove trovare un film
     platform = ''
@@ -89,7 +90,7 @@ def create_column(dataset, dataset_name):
     elif 'netflix' in dataset_name:
         platform = 'Netflix'
 
-    dataset.insert(11, 'present_in', platform)
+    dataset.insert(10, 'present_in', platform)
     return dataset
 
 
@@ -111,33 +112,39 @@ def test_dup(dataset):
             new_row['present_in'] = platforms[:-1]
 
             for i in dups:
-               dataset.drop(index=i,inplace=True);
-        new_dataset=dataset.append(new_row);
+                dataset.drop(index=i, inplace=True);
+        new_dataset = dataset.append(new_row);
 
     return new_dataset
+
+#0 General
+#1 dagli  11     TV_Y7
+#2 fino ai 13 con supervisione    PG
+#3 fino ai 17 con supervisione    R
+#4 sotto i 17 non ammessi
 
 
 def modify_rating(dataset):
     for index, row in dataset.iterrows():
         if "G" in row['rating']:
-            dataset.loc[index, 'rating'] = "G - General"
+            dataset.loc[index, 'rating'] = 0
         elif "PG" in row['rating']:
-            dataset.loc[index, 'rating'] = "PG - Parental Guidance"
+            dataset.loc[index, 'rating'] = 2
         elif "PG-13" in row['rating']:
-            dataset.loc[index, 'rating'] = "PG-13 - Parental Guidance Under 13"
+            dataset.loc[index, 'rating'] = 2
         elif "R" in row['rating']:
-            dataset.loc[index, 'rating'] = "R - Parental Guidance Under 17"
+            dataset.loc[index, 'rating'] = 3
         elif "NC-17" in row['rating']:
-            dataset.loc[index, 'rating'] = "Under 17 Not Admitted"
+            dataset.loc[index, 'rating'] = 4
         elif "TV_MA" in row['rating']:
-            dataset.loc[index, 'rating'] = "Under 17 Not Admitted"
+            dataset.loc[index, 'rating'] = 4
         elif "TV-Y" in row['rating']:
-            dataset.loc[index, 'rating'] = "G - General"
+            dataset.loc[index, 'rating'] = 0
         elif "TV-Y7" in row['rating']:
-            dataset.loc[index, 'rating'] = "TV_Y7 - Children Over 11"
+            dataset.loc[index, 'rating'] = 1
         elif "ALL" in row['rating']:
-            dataset.loc[index, 'rating'] = "G - General"
+            dataset.loc[index, 'rating'] = 0
         elif "+" not in row['rating']:
-            dataset.loc[index, 'rating'] = "Not Rated"
+            dataset.loc[index, 'rating'] = 5
 
     return dataset

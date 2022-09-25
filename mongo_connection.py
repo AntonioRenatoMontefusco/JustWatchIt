@@ -39,10 +39,10 @@ def initialize_db(dataset, collection):
 
 def create_rating_collection():
     collection = rating_collection()
-    indexs = [0, 1, 2, 3, 4, 5]
-    ratings = ['G - General', 'TV_Y7 - Children Over 11', 'PG - Parental Guidance', 'R - Parental Guidance Under 17',
-               'Under 17 Not Admitted', 'Not Rated']
-    for i in indexs:
+    indexes = range(0, 8)
+    ratings = ['General', 'Children Over 7', 'Children Over 11', 'Parental Guidance Under 13', 'Children Over 16',
+               'Parental Guidance Under 17', 'Under 17 Not Admitted', 'Over 18', 'Not Rated']
+    for i in indexes:
         element = {
             "id": i,
             "rating": ratings[i]

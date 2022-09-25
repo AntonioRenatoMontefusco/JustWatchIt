@@ -13,7 +13,7 @@ project_path = os.getcwd()
 
 def main_proc():
     datasets = []
-    for s in listdir("test"):
+    for s in listdir(project_path + "/dataset"):
         ds = clean_dataset(s)
         datasets.append(ds)
     dataset = merge_datasets(datasets)
@@ -28,7 +28,7 @@ def clean_dataset(dataset_name):
     try:
         jwi_logger.info("Starting cleaning process of dataset: %s", dataset_name)
 
-        dataset = pd.read_csv(path.join(project_path + "\\test", dataset_name))
+        dataset = pd.read_csv(path.join(project_path + "/dataset", dataset_name))
         dataset = drop_missing_values(dataset)
         dataset = drop_unused_columns(dataset)
         dataset = delete_dot_zero(dataset)
@@ -76,8 +76,6 @@ def delete_dot_zero(dataset):
     return dataset
 
 
-
-
 def create_column(dataset, dataset_name):
     # Creazione della colonna present_in che aiuta a capire dove trovare un film
     platform = ''
@@ -117,34 +115,53 @@ def test_dup(dataset):
 
     return new_dataset
 
-#0 General
-#1 dagli  11     TV_Y7
-#2 fino ai 13 con supervisione    PG
-#3 fino ai 17 con supervisione    R
-#4 sotto i 17 non ammessi
+
+# 0 General
+# 1 dai 7 in su
+# 2 dagli 11 in poi                 TV_Y7
+# 3 fino ai 13 con supervisione     PG
+# 4 dai 16 in su
+# 5 fino ai 17 con supervisione     R
+# 6 sotto i 17 non ammessi
+# 7 dai 18 in su
+# 8 not rated
 
 
 def modify_rating(dataset):
     for index, row in dataset.iterrows():
         if "G" in row['rating']:
             dataset.loc[index, 'rating'] = 0
-        elif "PG" in row['rating']:
-            dataset.loc[index, 'rating'] = 2
-        elif "PG-13" in row['rating']:
-            dataset.loc[index, 'rating'] = 2
-        elif "R" in row['rating']:
-            dataset.loc[index, 'rating'] = 3
-        elif "NC-17" in row['rating']:
-            dataset.loc[index, 'rating'] = 4
-        elif "TV_MA" in row['rating']:
-            dataset.loc[index, 'rating'] = 4
         elif "TV-Y" in row['rating']:
             dataset.loc[index, 'rating'] = 0
-        elif "TV-Y7" in row['rating']:
-            dataset.loc[index, 'rating'] = 1
         elif "ALL" in row['rating']:
             dataset.loc[index, 'rating'] = 0
-        elif "+" not in row['rating']:
+        elif "ALL_AGES" in row['rating']:
+            dataset.loc[index, 'rating'] = 0
+        elif "7+" in row['rating']:
+            dataset.loc[index, 'rating'] = 1
+        elif "TV-Y7" in row['rating']:
+            dataset.loc[index, 'rating'] = 2
+        elif "PG" in row['rating']:
+            dataset.loc[index, 'rating'] = 3
+        elif "PG-13" in row['rating']:
+            dataset.loc[index, 'rating'] = 3
+        elif "13+" in row['rating']:
+            dataset.loc[index, 'rating'] = 3
+        elif "16+" in row['rating']:
+            dataset.loc[index, 'rating'] = 4
+        elif "AGES_16_" in row['rating']:
+            dataset.loc[index, 'rating'] = 4
+        elif "R" in row['rating']:
             dataset.loc[index, 'rating'] = 5
+        elif "NC-17" in row['rating']:
+            dataset.loc[index, 'rating'] = 6
+        elif "TV_MA" in row['rating']:
+            dataset.loc[index, 'rating'] = 6
+        elif "18+" in row['rating']:
+            dataset.loc[index, 'rating'] = 7
+        elif "AGES_18_" in row['rating']:
+            dataset.loc[index, 'rating'] = 7
+        else:
+            dataset.loc[index, 'rating'] = 8
 
     return dataset

@@ -3,7 +3,7 @@ from mongo_connection import mongo_connection, rating_collection
 collection = mongo_connection()
 
 
-def insert(type, title, director, cast, locations, data_added, release_year, rating, duration, genres, description,
+def insert(type, title, director, cast, locations, data_added, release_year, rating, genres, description,
            present_in):
     new_row = {
         'type': type,
@@ -14,7 +14,6 @@ def insert(type, title, director, cast, locations, data_added, release_year, rat
         'data_added': data_added,
         'release_year': release_year,
         'rating': rating,
-        'duration': duration,
         'genres': genres,
         'description': description,
         'present_in': present_in
@@ -22,7 +21,7 @@ def insert(type, title, director, cast, locations, data_added, release_year, rat
     collection.insert_one(new_row)
 
 
-def modify(type, title, director, cast, locations, data_added, release_year, rating, duration, genres, description,
+def modify(type, title, director, cast, locations, data_added, release_year, rating, genres, description,
            present_in):
     new_row = {"$set": {
         'type': type,
@@ -33,7 +32,6 @@ def modify(type, title, director, cast, locations, data_added, release_year, rat
         'data_added': data_added,
         'release_year': release_year,
         'rating': rating,
-        'duration': duration,
         'genres': genres,
         'description': description,
         'present_in': present_in

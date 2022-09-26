@@ -13,7 +13,7 @@ def mongo_connection():
 def rating_collection():
     client = pymongo.MongoClient("mongodb://localhost:27017/")
     collection = client["JustWatchIT"]["Rating"]
-    return rating_collection
+    return collection
 
 
 def initialize_db(dataset, collection):

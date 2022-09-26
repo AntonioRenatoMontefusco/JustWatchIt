@@ -1,6 +1,6 @@
 import os
 from os import path, listdir
-
+import numpy as np
 import pandas as pd
 
 import JWILogger
@@ -13,7 +13,7 @@ project_path = os.getcwd()
 
 def main_proc():
     datasets = []
-    for s in listdir(project_path + "/dataset"):
+    for s in listdir(project_path + "/test"):
         ds = clean_dataset(s)
         datasets.append(ds)
     dataset = merge_datasets(datasets)
@@ -28,7 +28,7 @@ def clean_dataset(dataset_name):
     try:
         jwi_logger.info("Starting cleaning process of dataset: %s", dataset_name)
 
-        dataset = pd.read_csv(path.join(project_path + "/dataset", dataset_name))
+        dataset = pd.read_csv(path.join(project_path + "/test", dataset_name))
         dataset = drop_missing_values(dataset)
         dataset = drop_unused_columns(dataset)
         dataset = delete_dot_zero(dataset)
@@ -66,6 +66,7 @@ def change_columns_name(dataset):
 
 def merge_datasets(datasets):
     ds = pd.concat(datasets)
+    ds.reset_index(drop=True, inplace=True)
     ds = test_dup(ds)
     ds.to_csv("complete_dataset.csv", index=False)
     return ds
@@ -93,26 +94,33 @@ def create_column(dataset, dataset_name):
 
 
 def test_dup(dataset):
-    for index, row in dataset.iterrows():
-        title = row["title"]
+    new_dataset = pd.DataFrame()
+    duplicated_indexes = []
+    for index in dataset.index:
         dups = []
+        row = dataset.iloc[index]
+        title = row["title"]
+
         platforms = ''
         jwi_logger.info('Checking row %s', index)
-        dataset.reset_index(drop=True, inplace=True)
-        for index_, row_ in dataset.iterrows():
+        if index not in duplicated_indexes:
+            for index_, row_ in dataset.iterrows():
 
-            if row_["title"] == title:
-                dups.append(index_)
-                platforms += row_['present_in'] + ','
+                if row_["title"] == title:
+                    dups.append(index_)
+                    platforms += row_['present_in'] + ','
 
-        if dups.__len__() > 1:
-            new_row = dataset.iloc[dups[0]].copy(deep=True)
-            new_row['present_in'] = platforms[:-1]
+            if dups.__len__() > 1:
+                duplicated_indexes += dups
+                new_row = dataset.iloc[dups[0]].copy(deep=True)
+                new_row['present_in'] = platforms[:-1]
 
-            for i in dups:
-                dataset.drop(index=i, inplace=True);
-        new_dataset = dataset.append(new_row);
-
+                # for i in dups:
+                #    dataset.drop(index=i, inplace=True)
+                # dataset.reset_index(drop=True, inplace=True)
+                new_dataset = new_dataset.append(new_row)
+            else:
+                new_dataset = new_dataset.append(row)
     return new_dataset
 
 

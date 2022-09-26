@@ -13,7 +13,7 @@ project_path = os.getcwd()
 
 def main_proc():
     datasets = []
-    for s in listdir(project_path + "/test"):
+    for s in listdir(project_path + "/dataset"):
         ds = clean_dataset(s)
         datasets.append(ds)
     dataset = merge_datasets(datasets)
@@ -28,13 +28,14 @@ def clean_dataset(dataset_name):
     try:
         jwi_logger.info("Starting cleaning process of dataset: %s", dataset_name)
 
-        dataset = pd.read_csv(path.join(project_path + "/test", dataset_name))
+        dataset = pd.read_csv(path.join(project_path + "/dataset", dataset_name))
         dataset = drop_missing_values(dataset)
         dataset = drop_unused_columns(dataset)
         dataset = delete_dot_zero(dataset)
         dataset = change_columns_name(dataset)
         dataset = create_column(dataset, dataset_name)
         dataset = modify_rating(dataset)
+        dataset = split_column(dataset)
         return dataset
 
     except Exception as error:
@@ -53,7 +54,7 @@ def drop_missing_values(dataset):
 # Funzione che elimina colonne non utili
 def drop_unused_columns(dataset):
     # Inutli, indici dei dataset originali non piú utili nel nostro caso
-    dataset = dataset.drop(columns=['show_id', 'duration'])
+    dataset = dataset.drop(columns=['show_id'])
     return dataset
 
 
@@ -67,7 +68,7 @@ def change_columns_name(dataset):
 def merge_datasets(datasets):
     ds = pd.concat(datasets)
     ds.reset_index(drop=True, inplace=True)
-    ds = test_dup(ds)
+    ds = merge_duplicates(ds)
     ds.to_csv("complete_dataset.csv", index=False)
     return ds
 
@@ -93,7 +94,7 @@ def create_column(dataset, dataset_name):
     return dataset
 
 
-def test_dup(dataset):
+def merge_duplicates(dataset):
     new_dataset = pd.DataFrame()
     duplicated_indexes = []
     for index in dataset.index:
@@ -123,6 +124,21 @@ def test_dup(dataset):
                 new_dataset = new_dataset.append(row)
     return new_dataset
 
+
+def split_column(dataset):
+    dataset['film_duration'] = ''
+    dataset['number_of_seasons'] = ''
+    dataset.reset_index(drop=True, inplace=True)
+    for index in dataset.index:
+        row = dataset.iloc[index]
+        if row['type'] == 'TV Show':
+            dataset.at[index, 'number_of_seasons'] = row['duration']
+        elif row['type'] == 'Movie':
+            dataset.at[index, 'film_duration'] = row['duration']
+
+    dataset = dataset.drop(columns=['duration'])
+
+    return dataset
 
 # 0 General
 # 1 dai 7 in su
@@ -173,3 +189,6 @@ def modify_rating(dataset):
             dataset.loc[index, 'rating'] = 8
 
     return dataset
+
+
+

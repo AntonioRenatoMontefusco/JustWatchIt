@@ -28,9 +28,10 @@ def initialize_db(dataset, collection):
             "release_year": row["release_year"],
             "rating": row["rating"],
             "description": row["description"],
-            "duration": row["duration"],
             "genres": row["genres"],
             "present_in": row["present_in"],
+            "film_duration": row["film_duration0"],
+            "number_of_seasons": row["number_of_seasons"],
         }
         collection.insert_one(element)
 

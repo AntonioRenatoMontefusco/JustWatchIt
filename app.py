@@ -13,11 +13,21 @@ def hello_world():
 
 
 @app.route("/query/find_by_type", methods=['POST'])
-def find_by_name():
+def find_by_type():
     if request.method == 'POST':
-        name = request.form['name']
+        name = request.form['type']
         results = query.filter_by_type(name)
-        return render_template('/query.html', results=results, size=len(results), title="Ricerca per nome: " + name)
+        return render_template('/query.html', results=results, size=len(results),
+                               title="Ricerca per tipologia: " + name)
+    return json.dumps({"ok": True})
+
+
+@app.route("/query/find_by_year", methods=['POST'])
+def find_by_year():
+    if request.method == 'POST':
+        year = request.form['year']
+        results = query.find_by_year(year)
+        return render_template('/query.html', results=results, size=len(results), title="Ricerca per anno: " + year)
     return json.dumps({"ok": True})
 
 

@@ -43,7 +43,7 @@ def modify(type, title, director, cast, locations, data_added, release_year, rat
 
 
 def filter_by_type(type_to_filter):
-    return collection.find({"type": type_to_filter})
+    return list(collection.find({"type": type_to_filter}))
 
 
 def find_by_title(title):
@@ -75,12 +75,12 @@ def find_film_by_at_least_duration(duration):
     return collection.find({"type": "Movie", "film_duration": {"$lte": duration}})
 
 
-def find_film_by_at_least_year(year):
-    return collection.find({"type": "Movie", "release_year": {"$lte": year}})
+def find_by_year_range(min_year, max_year):
+    return collection.find({"release_year": {"$gte": min_year, "$lte": max_year}})
 
 
-def find_film_after_year(year):
-    return collection.find({"type": "Movie", "release_year": {"$gte": year}})
+def find_by_year(year):
+    return list(collection.find({"release_year": year}))
 
 
 def find_by_cast(cast):

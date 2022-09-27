@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/main.css') }}">
+    <meta charset="UTF-8">
+    <script type = "text/javascript" src = "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
+    </script>
+    <title>Query Results</title>
+</head>
+<body>
+<div style="margin-left: 5%; margin-top: 2%; margin-right: 5%">
+<h1 style="margin-bottom: 4%">{{ title }}. Numero di elementi trovati: {{ size }}</h1>
+<table id="results-table">
+    <thead>
+    <tr>
+        <!--  type,title,director,cast,locations,date_added,release_year,rating,genres,present_in,description,film_duration,number_of_seasons
+ -->
+        <th style="max-width: 250px">Tipologia</th>
+        <th style="width: 200px">Titolo</th>
+        <th>Descrizione</th>
+        <th>Generi</th>
+        <th>Regista</th>
+        <th>Cast</th>
+        <th>Locations</th>
+        <th>Data di aggiunta a catalogo</th>
+        <th>Anno di uscita</th>
+        <th>Rating</th>
+        <th>Durata del film</th>
+        <th>Numero di stagioni</th>
+        <th>Presente in</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for row in results %}
+    <tr>
+        <td> {{ row.type }}                 </td>
+        <td> {{ row.title }}                </td>
+        <td> {{ row.description }}          </td>
+        <td> {{ row.genres }}               </td>
+        <td> {{ row.director}}              </td>
+        <td> {{ row.cast }}                 </td>
+        <td> {{ row.locations }}            </td>
+        <td> {{ row.date_added }}           </td>
+        <td> {{ row.release_year }}         </td>
+        <td> {{ row.rating }}               </td>
+        <td> {{ row.film_duration }}        </td>
+        <td> {{ row.number_of_seasons }}    </td>
+        <td> {{ row.present_in }}           </td>
+        <td style="width: 200px">
+            <form method="post"  action="/query/show_update">
+                <input type="hidden" name="url"  value="{{row.url}}" />
+                <button type="submit" class="modify-button">Modifica</button>
+            </form>
+        </td>
+        <td style="width: 200px">
+            <form method="post"  action="/query/delete">
+                <input type="hidden" name="url"  value="{{row.url}}" />
+                <button type="submit" class="modify-button">Elimina</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody></table>
+
+
+</div>
+</body>
+</html>

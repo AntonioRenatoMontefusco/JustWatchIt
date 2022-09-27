@@ -38,9 +38,9 @@
         </div>
         <div id="home-text">
           <div>
-            This application allows the user to query a database containing
-            videogames available on the platform Steam. Use one of different
-            queries to interact with it!
+            Questa applicazione ti consente di ricercare vari film o serie TV e vedere se esse sono presenti nel catalogo di Netflix, Disney+, Amazon Prime Video o Hulu.
+            Usa una delle query in basso per iniziare la tua sessione di Binge Watching! <br> 
+            Just Watch IT, non fartelo spoilerare! 
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@
       </div>
       <div class="query-container">
         <div class="query-title">Ricerca per categoria (EQUAL)</div>
-        <h4 class = "info-box"> Ricerca giochi per categoria per match esatto della stringa data</h4>
+        <h4 class = "info-box"> Ricerca Film o Serie TV per categoria per match esatto della stringa data</h4>
         <form action="/query/find_by_category" method="post">
           <div class="query-1">
             <div class="form-row">
@@ -77,50 +77,52 @@
         </form>
       </div>
       <div class="query-container">
-        <div class="query-title">Ricerca per recensioni</div>
-        <h4 class = "info-box"> Ricerca giochi con un numero di recensioni maggiore o uguale di quello specificato</h4>
+        <div class="query-title">Ricerca per titolo ed anno</div>
+        <h4 class = "info-box"> Ricerca Film o Serie TV per titolo ed anno per match esatto della stringa data</h4>
         <form action="/query/find_by_review_count" method="post">
           <div class="query-1">
             <div class="form-row">
-              <div class="form-text">Numero recensioni</div>
-              <input type="number" class = "text-field" min = "0" step = "1" class = "text-field"  name="count" required/>
+              <div class="form-text">Titolo</div>
+              <input type="text" class = "text-field" class = "text-field"  name="title" required/>
+              <div class="form-text">Anno di uscita</div>
+              <input type="number" class = "text-field" min = "1900" max = "2022" step = "1" class = "text-field"  name="year" required/>
             </div>
             <button type="submit" class="query-button">Ricerca</button>
           </div>
         </form>
       </div>
       <div class="query-container">
-        <div class="query-title">Ricerca per rating recensioni</div>
-        <h4 class = "info-box"> Ricerca giochi con una percentuale di rating maggiore o uguale di quella specificata</h4>
+        <div class="query-title">Ricerca per regista</div>
+        <h4 class = "info-box"> Ricerca Film o Serie Tv per nome del regista </h4>
         <form action="/query/find_by_review_rating" method="post">
           <div class="query-1">
             <div class="form-row">
-              <div class="form-text">Rating</div>
-              <input type="number" class = "text-field" min = "0" max = "100" step = "1" name="rating" required/>
+              <div class="form-text">Regista</div>
+              <input type="text" class = "text-field"  step = "1" name="rating" required/>
             </div>
             <button type="submit" class="query-button">Ricerca</button>
           </div>
         </form>
       </div>
       <div class="query-container">
-        <div class="query-title">Ricerca ordinata per prezzo</div>
+        <div class="query-title">Ricerca una Serie TV per il numero di stagioni</div>
         <h4 class = "info-box"> Mostra il database ordinato per prezzo crescente </h4>
         <form action="/query/find_orderby_price" method="post">
           <button type="submit" class="query-button">Ricerca</button>
         </form>
       </div>
       <div class="query-container">
-        <div class="query-title">Ricerca per range di prezzo</div>
-        <h4 class = "info-box"> Ricerca giochi con prezzo compreso fra i valori specificati</h4>
-        <form action="/query/find_by_price_range" method="post">
+        <div class="query-title">Ricerca per range di anno</div>
+        <h4 class = "info-box"> Ricerca di film o serie tv con anno di uscita compreso fra i valori specificati</h4>
+        <form action="/query/find_by_year_range" method="post">
           <div class="query-1">
             <div class="form-row">
               <div class="form-text">Min</div>
-              <input type="number" class = "text-field" min = "0" max = "999" step = ".01" name="min_price" required/>
+              <input type="number" class = "text-field" min = "1950" max = "2100" step = "1" name="min_year" required/>
             </div>
             <div class="form-row">
               <div class="form-text">Max</div>
-              <input type="number" class = "text-field" min = "0" max = "999" step = ".01" name="max_price" required/>
+              <input type="number" class = "text-field" min = "1950" max = "2100" step = "1" name="max_year" required/>
             </div>
             <button type="submit" class="query-button">Ricerca</button>
           </div>
@@ -128,20 +130,20 @@
       </div>
       <div class="query-container">
         <div class="query-title">Ricerca per anno di uscita</div>
-        <h4 class = "info-box"> Ricerca giochi usciti nell'anno specificato</h4>
+        <h4 class = "info-box"> Ricerca Film o Serie TV usciti nell'anno specificato</h4>
         <form action="/query/find_by_year" method="post">
           <div class="query-1">
             <div class="form-row">
               <div class="form-text">Anno di uscita</div>
-              <input type="number" class = "text-field" min = "1900" max = "2022" step = "1" class = "text-field"  name="year_out" required/>
+              <input type="number" class = "text-field" min = "1900" max = "2022" step = "1" class = "text-field"  name="year" required/>
             </div>
             <button type="submit" class="query-button">Ricerca</button>
           </div>
         </form>
       </div>
       <div class="query-container">
-        <div class="query-title">Ricerca per PEGI</div>
-        <h4 class = "info-box"> Ricerca giochi della tipologia di PEGI selezionata</h4>
+        <div class="query-title">Ricerca per Rating</div>
+        <h4 class = "info-box"> Ricerca Film o Serie TV con rating minore di quello inserito</h4>
         <form action="/query/find_by_pegi" method="post">
           <div class="query-1">
             <div class="form-row">
@@ -162,15 +164,15 @@
         </form>
       </div>
       <div class="query-container">
-        <div class="query-title">Ricerca ordinata per rating recensione</div>
-        <h4 class = "info-box"> Mostra il database ordinato per percentuale di rating</h4>
+        <div class="query-title">Ricerca ordinata per data di uscita</div>
+        <h4 class = "info-box"> Mostra il database ordinato per data di uscita</h4>
         <form action="/query/find_orderby_rating" method="post">
           <button type="submit" class="query-button">Ricerca</button>
         </form>
       </div>
       <div class="query-container-form">
         <div class="query-title" style="margin-top: 10px">
-          Inserimento nuovo gioco
+          Inserimento nuovo Film o Serie TV
         </div>
         <div id="form-container">
           <form

@@ -64,11 +64,23 @@ def find_by_director(director):
 
 
 def find_series_by_season_count(num_season):
-    return collection.find({"type": "TV Show", "duration": {"$regex": ".*" + num_season + ".*"}})
+    return collection.find({"type": "TV Show", "duration": num_season})
 
 
 def find_series_by_at_least_season_count(num_season):
-    return collection.find({"type": "TV Show", "duration": {"$gt": {"$split": ".*" + num_season + ".*"}}})
+    return collection.find({"type": "TV Show", "number_of_seasons": {"$lte": num_season}})
+
+
+def find_film_by_at_least_duration(duration):
+    return collection.find({"type": "Movie", "film_duration": {"$lte": duration}})
+
+
+def find_film_by_at_least_year(year):
+    return collection.find({"type": "Movie", "release_year": {"$lte": year}})
+
+
+def find_film_after_year(year):
+    return collection.find({"type": "Movie", "release_year": {"$gte": year}})
 
 
 def find_by_cast(cast):
@@ -79,6 +91,7 @@ def find_by_rating(rating):
     r_collection = rating_collection()
     rating_id = r_collection.find_one({'rating': rating})["id"]
     return collection.find({"rating": {'$lt': rating_id}})
+
 
 def find_by_rating_less_than(age):
     db = collection.find()

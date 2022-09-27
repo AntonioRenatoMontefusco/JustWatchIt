@@ -2,7 +2,7 @@ import os
 from os import path, listdir
 import numpy as np
 import pandas as pd
-
+import re
 import JWILogger
 from mongo_connection import mongo_connection, initialize_db
 
@@ -132,9 +132,9 @@ def split_column(dataset):
     for index in dataset.index:
         row = dataset.iloc[index]
         if row['type'] == 'TV Show':
-            dataset.at[index, 'number_of_seasons'] = row['duration']
+            dataset.at[index, 'number_of_seasons'] = re.sub('[a-zA-Z ]*', '', row['duration'])
         elif row['type'] == 'Movie':
-            dataset.at[index, 'film_duration'] = row['duration']
+            dataset.at[index, 'film_duration'] = re.sub('[a-zA-Z ]*', '', row['duration'])
 
     dataset = dataset.drop(columns=['duration'])
 

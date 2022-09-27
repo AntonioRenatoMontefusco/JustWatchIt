@@ -30,7 +30,7 @@ def initialize_db(dataset, collection):
             "description": row["description"],
             "genres": row["genres"],
             "present_in": row["present_in"],
-            "film_duration": row["film_duration0"],
+            "film_duration": row["film_duration"],
             "number_of_seasons": row["number_of_seasons"],
         }
         collection.insert_one(element)

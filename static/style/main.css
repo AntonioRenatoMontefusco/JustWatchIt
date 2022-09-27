@@ -1,0 +1,236 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #e7e7e7;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-weight: 900;
+}
+
+.header {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 80px;
+    position: fixed;
+    top: 0;
+    background-color: #0a449b;
+    font-size: 28px;
+}
+
+header a {
+    font-size: bold;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:visited {
+    color: white;
+}
+
+.gameurl {
+    text-decoration: none;
+    color: #071120;
+}
+
+.gameurl:visited {
+    color: #071120;
+}
+
+#home {
+    height: 100vh;
+    background-color:#071120;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#content {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#home-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    margin-left: 100px;
+    color: #e7e7e7;
+    text-shadow: 5px 10px #02070e;
+}
+
+#queries {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.query-container {
+    width:68%;
+    margin-top: 50px;
+    border: 1px solid #02041e;
+    background-color: #dfdfdf;
+    border-radius: 2px;
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.query-container-form {
+    width:68%;
+    margin-top: 50px;
+    border: 1px solid #02041e;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.form-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.results-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.query-title {
+    padding-bottom: 2px;
+    font-size: 26px;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-weight: 900;
+
+}
+
+.label-form {
+    padding-bottom: 4px;
+    font-size: 20px;
+    color: #071120;
+}
+
+.text-field {
+    border: 1px solid #e5e7f2;
+    background: #f9f9f9;
+    padding: 8px 10px 8px 10px;
+    border-radius: 4px;
+    color: #343e4c;
+    font-size: 0.96em;
+}
+
+.form-text {
+    padding-right: 20px;
+}
+
+.info-box {
+    font-weight: 300;
+    margin-top: 1%;
+    margin-bottom: 16px;
+}
+
+.query-button {
+    align-self: center;
+    margin-top: 20px;
+    width: 120px;
+    border: 1px solid #071120;
+    border-radius: 5px;
+    background-color: #071120;
+    padding: 8px 10px 8px 10px;
+    color: white;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 16px;
+    transition-duration: 0.4s;
+}
+
+.query-button:hover {
+    background-color: #384456;
+    border: 1px solid #384456;
+    cursor:pointer;
+}
+
+.modify-button {
+    align-self: center;
+    margin-top: 20px;
+    width: 120px;
+    border: 1px solid #071120;
+    border-radius: 5px;
+    background-color: #071120;
+    padding: 8px 10px 8px 10px;
+    color: white;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 16px;
+    transition-duration: 0.4s;
+}
+
+.modify-button:hover {
+    background-color: #384456;
+    border: 1px solid #384456;
+    cursor:pointer;
+}
+
+.query-1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#results-table {
+  font-weight: 200px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#results-table td, #results-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  min-width: 100px;
+}
+
+#results-table tr:nth-child(even){background-color: #f2f2f2;}
+
+#results-table tr:hover {background-color: #ddd;}
+
+#results-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #071120;
+  color: white;
+  min-width: 100px;
+}
+
+table {
+    text-align: center;
+}

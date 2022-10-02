@@ -22,38 +22,8 @@ def find_by_type():
     return json.dumps({"ok": True})
 
 
-@app.route("/query/find_by_genre", methods=['POST'])
-def find_by_genre():
-    if request.method == 'POST':
-        genre = request.form['genre']
-        results = query.find_by_genres(genre)
-        return render_template('/query.html', results=results, size=len(results),
-                               title="Ricerca per genere: " + genre)
-    return json.dumps({"ok": True})
-
-
-@app.route("/query/find_by_title_and_year", methods=['POST'])
-def find_by_title_and_year():
-    if request.method == 'POST':
-        title = request.form['title']
-        year = request.form['year']
-        results = query.find_by_title_and_year(title, year)
-        return render_template('/query.html', results=results, size=len(results),
-                               title="Ricerca per titolo e anno di uscita: " + title + "uscito nel " + year)
-    return json.dumps({"ok": True})
-
-
-@app.route("/query/find_by_title", methods=['POST'])
-def find_by_year():
-    if request.method == 'POST':
-        title = request.form['title']
-        results = query.find_by_title(title)
-        return render_template('/query.html', results=results, size=len(results), title="Ricerca per titolo: " + title)
-    return json.dumps({"ok": True})
-
-
 @app.route("/query/find_by_year", methods=['POST'])
-def find_by_title():
+def find_by_year():
     if request.method == 'POST':
         year = request.form['year']
         results = query.find_by_year(year)

@@ -64,13 +64,13 @@
         </form>
       </div>
       <div class="query-container">
-        <div class="query-title">Ricerca per genere (EQUAL)</div>
-        <h4 class = "info-box"> Ricerca Film o Serie TV per genere </h4>
-        <form action="/query/find_by_genre" method="post">
+        <div class="query-title">Ricerca per categoria (EQUAL)</div>
+        <h4 class = "info-box"> Ricerca Film o Serie TV per categoria per match esatto della stringa data</h4>
+        <form action="/query/find_by_category" method="post">
           <div class="query-1">
             <div class="form-row">
-              <div class="form-text">Genere</div>
-              <input type="text" class = "text-field" name="genre" />
+              <div class="form-text">Categoria</div>
+              <input type="text" class = "text-field" name="category" />
             </div>
             <button type="submit" class="query-button">Ricerca</button>
           </div>
@@ -79,12 +79,12 @@
       <div class="query-container">
         <div class="query-title">Ricerca per titolo ed anno</div>
         <h4 class = "info-box"> Ricerca Film o Serie TV per titolo ed anno per match esatto della stringa data</h4>
-        <form action="/query/find_by_title_and_year" method="post">
+        <form action="/query/find_by_review_count" method="post">
           <div class="query-1">
             <div class="form-row">
               <div class="form-text">Titolo</div>
               <input type="text" class = "text-field" class = "text-field"  name="title" required/>
-              <div class="form-text">Anno</div>
+              <div class="form-text">Anno di uscita</div>
               <input type="number" class = "text-field" min = "1900" max = "2022" step = "1" class = "text-field"  name="year" required/>
             </div>
             <button type="submit" class="query-button">Ricerca</button>

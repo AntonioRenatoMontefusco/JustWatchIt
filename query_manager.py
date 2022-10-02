@@ -3,6 +3,15 @@ from mongo_connection import mongo_connection, rating_collection
 collection = mongo_connection()
 
 
+def filter_by_type(type_to_filter):
+    return list(collection.find({"type": type_to_filter}))
+
+def find_by_genres(genre):
+    return list(collection.find({"genres": {'$regex': ".*" + genre + ".*", "$options": "i"}}))
+
+def find_by_title_and_year(title, year):
+    return list(collection.find({"title": title, "release_year": year}))
+
 def insert(type, title, director, cast, locations, data_added, release_year, rating, genres, description,
            present_in):
     new_row = {
@@ -19,6 +28,10 @@ def insert(type, title, director, cast, locations, data_added, release_year, rat
         'present_in': present_in
     }
     collection.insert_one(new_row)
+
+
+def find_by_title(title):
+    return list(collection.find({"title": {"$regex": ".*" + title + ".*"}}))
 
 
 def modify(type, title, director, cast, locations, data_added, release_year, rating, genres, description,
@@ -40,18 +53,6 @@ def modify(type, title, director, cast, locations, data_added, release_year, rat
     collection.update_one({"title": title, "release_year": release_year}, new_row)
 
     return find_by_title_and_year(title, release_year)
-
-
-def filter_by_type(type_to_filter):
-    return list(collection.find({"type": type_to_filter}))
-
-
-def find_by_title(title):
-    return collection.find({"title": {"$regex": ".*" + title + ".*"}})
-
-
-def find_by_title_and_year(title, year):
-    return collection.find_one({"title": title, "release_year": year})
 
 
 def delete_by_title_and_year(title, year):

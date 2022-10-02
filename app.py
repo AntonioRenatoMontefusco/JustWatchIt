@@ -22,21 +22,13 @@ def find_by_type():
     return json.dumps({"ok": True})
 
 
-@app.route("/query/find_by_year", methods=['POST'])
-def find_by_year():
-    if request.method == 'POST':
-        year = request.form['year']
-        results = query.find_by_year(year)
-        return render_template('/query.html', results=results, size=len(results), title="Ricerca per anno: " + year)
-    return json.dumps({"ok": True})
 
 
 @app.route("/query/show_update", methods=['POST'])
 def show_update():
     title = request.form["title"]
-    year = request.form["year"]
 
-    res = query.find_by_title_and_year(title=title, year=year)
+    res = query.find_by_title_equals(title=title)
     return render_template('/update.html', element=res)
 
 
@@ -50,24 +42,33 @@ def find_by_genre():
     return json.dumps({"ok": True})
 
 
-@app.route("/query/find_by_title_and_year", methods=['POST'])
-def find_by_title_and_year():
-    if request.method == 'POST':
-        title = request.form['title']
-        year = request.form['year']
-        results = query.find_by_title_and_year(title, year)
-        return render_template('/query.html', results=results, size=len(results),
-                               title="Ricerca per titolo e anno di uscita: " + title + "uscito nel " + year)
-    return json.dumps({"ok": True})
-
-
 @app.route("/query/find_by_title", methods=['POST'])
 def find_by_title():
     if request.method == 'POST':
         title = request.form['title']
         results = query.find_by_title(title)
-        return render_template('/query.html', results=results, size=len(results), title="Ricerca per titolo: " + title)
+        return render_template('/query.html', results=results, size=len(results),
+                               title="Ricerca per titolo: " + title )
     return json.dumps({"ok": True})
+
+@app.route("/query/find_by_year", methods=['POST'])
+def find_by_year():
+    if request.method == 'POST':
+        year = request.form['year']
+        results = query.find_by_year(year)
+        return render_template('/query.html', results=results, size=len(results), title="Ricerca per anno: " + year)
+    return json.dumps({"ok": True})
+
+
+@app.route("/query/find_by_director", methods=['POST'])
+def find_by_director():
+    if request.method == 'POST':
+        director = request.form['director']
+        results = query.find_by_director(director)
+        return render_template('/query.html', results=results, size=len(results), title="Ricerca per regista: " + director)
+    return json.dumps({"ok": True})
+
+
 
 
 if __name__ == '__main__':

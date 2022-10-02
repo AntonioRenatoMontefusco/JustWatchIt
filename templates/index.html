@@ -1,360 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static',filename='style/main.css') }}"
+            rel="stylesheet"
+            type="text/css"
+            href="{{ url_for('static',filename='style/main.css') }}"
     />
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>FlaskApp</title>
-  </head>
+</head>
 
-  <body style="margin: 0px">
-    <!-- Header -->
-    <div class="header">
-      <div>
+<body style="margin: 0px">
+<!-- Header -->
+<div class="header">
+    <div>
         <a href="#home">HOME</a>
-      </div>
-      <div>
-        <img
-          width="400"
-          src="../static/style/image.svg"
-        />
-      </div>
-      <div>
-        <a href="#queries">QUERIES</a>
-      </div>
     </div>
+    <div>
+        <img
+                width="400"
+                src="../static/style/image.svg"
+        />
+    </div>
+    <div>
+        <a href="#queries">QUERIES</a>
+    </div>
+</div>
 
-    <!-- Intro -->
-    <div id="home">
-      <div id="content">
+<!-- Intro -->
+<div id="home">
+    <div id="content">
         <div style="margin-left:-360px">
-          <img
-            width="1200"
-            src="../static/style/image.svg"
-          />
+            <img
+                    width="1200"
+                    src="../static/style/image.svg"
+            />
         </div>
         <div id="home-text">
-          <div>
-            Questa applicazione ti consente di ricercare vari film o serie TV e vedere se esse sono presenti nel catalogo di Netflix, Disney+, Amazon Prime Video o Hulu.
-            Usa una delle query in basso per iniziare la tua sessione di Binge Watching! <br> 
-            Just Watch IT, non fartelo spoilerare! 
-          </div>
+            <div>
+                Questa applicazione ti consente di ricercare vari film o serie TV e vedere se esse sono presenti nel
+                catalogo di Netflix, Disney+, Amazon Prime Video o Hulu.
+                Usa una delle query in basso per iniziare la tua sessione di Binge Watching! <br>
+                Just Watch IT, non fartelo spoilerare!
+            </div>
         </div>
-      </div>
     </div>
-    <!-- Queries -->
-    <div id="queries">
-      <div class="query-container">
+</div>
+<!-- Queries -->
+<div id="queries">
+    <div class="query-container">
         <div class="query-title">Ricerca per tipologia</div>
-        <h4 class = "info-box"> Ricerca film o serie TV</h4>
+        <h4 class="info-box"> Ricerca film o serie TV</h4>
         <form action="/query/find_by_type" method="post">
-          <div class="query-1">
-            <div class="form-row">
-              <div class="form-text">Tipologia</div>
-              <select name="type"  class = "text-field" id="type" required>
-                <option value="TV Show">TV Show</option>
-                <option value="Movie">Movie</option>
-          </select>
+            <div class="query-1">
+                <div class="form-row">
+                    <div class="form-text">Tipologia</div>
+                    <select name="type" class="text-field" id="type" required>
+                        <option value="TV Show">TV Show</option>
+                        <option value="Movie">Movie</option>
+                    </select>
+                </div>
+                <button type="submit" class="query-button">Ricerca</button>
             </div>
-            <button type="submit" class="query-button">Ricerca</button>
-          </div>
         </form>
-      </div>
-      <div class="query-container">
-        <div class="query-title">Ricerca per categoria (EQUAL)</div>
-        <h4 class = "info-box"> Ricerca Film o Serie TV per categoria per match esatto della stringa data</h4>
-        <form action="/query/find_by_category" method="post">
-          <div class="query-1">
-            <div class="form-row">
-              <div class="form-text">Categoria</div>
-              <input type="text" class = "text-field" name="category" />
+    </div>
+    <div class="query-container">
+        <div class="query-title">Ricerca per genere (EQUAL)</div>
+        <h4 class="info-box"> Ricerca Film o Serie TV per genere </h4>
+        <form action="/query/find_by_genre" method="post">
+            <div class="query-1">
+                <div class="form-row">
+                    <div class="form-text">Genere</div>
+                    <input type="text" class="text-field" name="genre"/>
+                </div>
+                <button type="submit" class="query-button">Ricerca</button>
             </div>
-            <button type="submit" class="query-button">Ricerca</button>
-          </div>
         </form>
-      </div>
-      <div class="query-container">
-        <div class="query-title">Ricerca per titolo ed anno</div>
-        <h4 class = "info-box"> Ricerca Film o Serie TV per titolo ed anno per match esatto della stringa data</h4>
-        <form action="/query/find_by_review_count" method="post">
-          <div class="query-1">
-            <div class="form-row">
-              <div class="form-text">Titolo</div>
-              <input type="text" class = "text-field" class = "text-field"  name="title" required/>
-              <div class="form-text">Anno di uscita</div>
-              <input type="number" class = "text-field" min = "1900" max = "2022" step = "1" class = "text-field"  name="year" required/>
+    </div>
+    <div class="query-container">
+        <div class="query-title">Ricerca per titolo</div>
+        <h4 class="info-box"> Ricerca Film o Serie TV per titolo </h4>
+        <form action="/query/find_by_title" method="post">
+            <div class="query-1">
+                <div class="form-row">
+                    <div class="form-text">Titolo</div>
+                    <input type="text" class="text-field" class="text-field" name="title" required/>
+                </div>
+                <button type="submit" class="query-button">Ricerca</button>
             </div>
-            <button type="submit" class="query-button">Ricerca</button>
-          </div>
         </form>
-      </div>
-      <div class="query-container">
+    </div>
+    <div class="query-container">
         <div class="query-title">Ricerca per regista</div>
-        <h4 class = "info-box"> Ricerca Film o Serie Tv per nome del regista </h4>
-        <form action="/query/find_by_review_rating" method="post">
-          <div class="query-1">
-            <div class="form-row">
-              <div class="form-text">Regista</div>
-              <input type="text" class = "text-field"  step = "1" name="rating" required/>
+        <h4 class="info-box"> Ricerca Film o Serie Tv per nome del regista </h4>
+        <form action="/query/find_by_director" method="post">
+            <div class="query-1">
+                <div class="form-row">
+                    <div class="form-text">Regista</div>
+                    <input type="text" class="text-field" step="1" name="director" required/>
+                </div>
+                <button type="submit" class="query-button">Ricerca</button>
             </div>
-            <button type="submit" class="query-button">Ricerca</button>
-          </div>
         </form>
-      </div>
-      <div class="query-container">
+    </div>
+    <div class="query-container">
         <div class="query-title">Ricerca una Serie TV per il numero di stagioni</div>
-        <h4 class = "info-box"> Mostra il database ordinato per prezzo crescente </h4>
+        <h4 class="info-box"> Mostra le stagioni con il numero di stagioni inserite </h4>
         <form action="/query/find_orderby_price" method="post">
-          <button type="submit" class="query-button">Ricerca</button>
+            <input type="number" class="text-field" step="1" name="seasons" required/>
+            <button type="submit" class="query-button">Ricerca</button>
         </form>
-      </div>
-      <div class="query-container">
+    </div>
+    <div class="query-container">
         <div class="query-title">Ricerca per range di anno</div>
-        <h4 class = "info-box"> Ricerca di film o serie tv con anno di uscita compreso fra i valori specificati</h4>
+        <h4 class="info-box"> Ricerca di film o serie tv con anno di uscita compreso fra i valori specificati</h4>
         <form action="/query/find_by_year_range" method="post">
-          <div class="query-1">
-            <div class="form-row">
-              <div class="form-text">Min</div>
-              <input type="number" class = "text-field" min = "1950" max = "2100" step = "1" name="min_year" required/>
+            <div class="query-1">
+                <div class="form-row">
+                    <div class="form-text">Min</div>
+                    <input type="number" class="text-field" min="1950" max="2100" step="1" name="min_year" required/>
+                </div>
+                <div class="form-row">
+                    <div class="form-text">Max</div>
+                    <input type="number" class="text-field" min="1950" max="2100" step="1" name="max_year" required/>
+                </div>
+                <button type="submit" class="query-button">Ricerca</button>
             </div>
-            <div class="form-row">
-              <div class="form-text">Max</div>
-              <input type="number" class = "text-field" min = "1950" max = "2100" step = "1" name="max_year" required/>
-            </div>
-            <button type="submit" class="query-button">Ricerca</button>
-          </div>
         </form>
-      </div>
-      <div class="query-container">
+    </div>
+    <div class="query-container">
         <div class="query-title">Ricerca per anno di uscita</div>
-        <h4 class = "info-box"> Ricerca Film o Serie TV usciti nell'anno specificato</h4>
+        <h4 class="info-box"> Ricerca Film o Serie TV usciti nell'anno specificato</h4>
         <form action="/query/find_by_year" method="post">
-          <div class="query-1">
-            <div class="form-row">
-              <div class="form-text">Anno di uscita</div>
-              <input type="number" class = "text-field" min = "1900" max = "2022" step = "1" class = "text-field"  name="year" required/>
+            <div class="query-1">
+                <div class="form-row">
+                    <div class="form-text">Anno di uscita</div>
+                    <input type="number" class="text-field" min="1900" max="2022" step="1" class="text-field"
+                           name="year" required/>
+                </div>
+                <button type="submit" class="query-button">Ricerca</button>
             </div>
-            <button type="submit" class="query-button">Ricerca</button>
-          </div>
         </form>
-      </div>
-      <div class="query-container">
+    </div>
+    <div class="query-container">
         <div class="query-title">Ricerca per Rating</div>
-        <h4 class = "info-box"> Ricerca Film o Serie TV con rating minore di quello inserito</h4>
+        <h4 class="info-box"> Ricerca Film o Serie TV con rating minore di quello inserito</h4>
         <form action="/query/find_by_pegi" method="post">
-          <div class="query-1">
-            <div class="form-row">
-              <div class="form-text">PEGI</div>
-              <select name="pegi_type"  class = "text-field" id="pegi_type" required>
-                    <option value="Mature 17+">Mature 17+</option>
-                    <option value="Everyone">Everyone</option>
-                    <option value="Teen">Teen</option>
-                    <option value="Everyone 10+">Everyone 10+</option>
-                    <option value="Rating Pending">Rating Pending</option>
-                    <option value="Adults Only 18+">Adults Only 18+</option>
-                    <option value="Early Childhood">Early Childhood</option>
-                    <option value="Everyone (China)">Everyone (China)</option>
-              </select>
+            <div class="query-1">
+                <div class="form-row">
+                    <div class="form-text">PEGI</div>
+                    <select name="pegi_type" class="text-field" id="pegi_type" required>
+                        <option value="Mature 17+">Mature 17+</option>
+                        <option value="Everyone">Everyone</option>
+                        <option value="Teen">Teen</option>
+                        <option value="Everyone 10+">Everyone 10+</option>
+                        <option value="Rating Pending">Rating Pending</option>
+                        <option value="Adults Only 18+">Adults Only 18+</option>
+                        <option value="Early Childhood">Early Childhood</option>
+                        <option value="Everyone (China)">Everyone (China)</option>
+                    </select>
+                </div>
+                <button type="submit" class="query-button">Ricerca</button>
             </div>
-            <button type="submit" class="query-button">Ricerca</button>
-          </div>
         </form>
-      </div>
-      <div class="query-container">
+    </div>
+    <div class="query-container">
         <div class="query-title">Ricerca ordinata per data di uscita</div>
-        <h4 class = "info-box"> Mostra il database ordinato per data di uscita</h4>
+        <h4 class="info-box"> Mostra il database ordinato per data di uscita</h4>
         <form action="/query/find_orderby_rating" method="post">
-          <button type="submit" class="query-button">Ricerca</button>
+            <button type="submit" class="query-button">Ricerca</button>
         </form>
-      </div>
-      <div class="query-container-form">
+    </div>
+    <div class="query-container-form">
         <div class="query-title" style="margin-top: 10px">
-          Inserimento nuovo Film o Serie TV
+            Inserimento nuovo Film o Serie TV
         </div>
         <div id="form-container">
-          <form
-            action="/query/insert_game"
-            method="post"
-            style="display: flex; flex-direction: column; margin-bottom: 30px"
-          >
-            <div style="display: flex; flex-direction: row">
-              <div class="form-fields">
-                <label class="label-form" for="name">Nome</label>
-                <input type="text" class = "text-field" id="name" name="name" required /><br />
-                <label class="label-form" for="url">URL</label>
-                <input type="text" class = "text-field" id="url" name="url" required /><br />
-                <label class="label-form" for="date-div">Data</label>
-                <div id="date-div" style="display: flex; flex-direction: row">
-                  <input
-                    type="number" class = "text-field"
-                    id="day"
-                    name="day"
-                    min="1"
-                    max="31"
-                    value="1"
-                    step="1"
-                  />
-                  <select name="month"  class = "text-field" id="month">
-                    <option value="Jan">January</option>
-                    <option value="Feb">February</option>
-                    <option value="Mar">March</option>
-                    <option value="Apr">April</option>
-                    <option value="May">May</option>
-                    <option value="Jun">June</option>
-                    <option value="Jul">July</option>
-                    <option value="Aug">August</option>
-                    <option value="Sep">September</option>
-                    <option value="Oct">October</option>
-                    <option value="Nov">November</option>
-                    <option value="Dec">December</option>
-                  </select>
-                  <input
-                    type="number" class = "text-field"
-                    id="year"
-                    name="year"
-                    min="1900"
-                    max="2022"
-                    value="2022"
-                    step="1"
-                  />
+            <form
+                    action="/query/insert_game"
+                    method="post"
+                    style="display: flex; flex-direction: column; margin-bottom: 30px"
+            >
+                <div style="display: flex; flex-direction: row">
+                    <div class="form-fields">
+                        <label class="label-form" for="name">Nome</label>
+                        <input type="text" class="text-field" id="name" name="name" required/><br/>
+                        <label class="label-form" for="url">URL</label>
+                        <input type="text" class="text-field" id="url" name="url" required/><br/>
+                        <label class="label-form" for="date-div">Data</label>
+                        <div id="date-div" style="display: flex; flex-direction: row">
+                            <input
+                                    type="number" class="text-field"
+                                    id="day"
+                                    name="day"
+                                    min="1"
+                                    max="31"
+                                    value="1"
+                                    step="1"
+                            />
+                            <select name="month" class="text-field" id="month">
+                                <option value="Jan">January</option>
+                                <option value="Feb">February</option>
+                                <option value="Mar">March</option>
+                                <option value="Apr">April</option>
+                                <option value="May">May</option>
+                                <option value="Jun">June</option>
+                                <option value="Jul">July</option>
+                                <option value="Aug">August</option>
+                                <option value="Sep">September</option>
+                                <option value="Oct">October</option>
+                                <option value="Nov">November</option>
+                                <option value="Dec">December</option>
+                            </select>
+                            <input
+                                    type="number" class="text-field"
+                                    id="year"
+                                    name="year"
+                                    min="1900"
+                                    max="2022"
+                                    value="2022"
+                                    step="1"
+                            />
+                        </div>
+                        <br/>
+                        <label class="label-form" for="img_url"
+                        >Immagine di copertina (URL)</label
+                        >
+                        <input type="text" class="text-field" id="img_url" name="img_url"/><br/>
+                    </div>
+
+                    <div class="form-fields">
+                        <label class="label-form" for="price">Prezzo</label>
+                        <input
+                                type="number" class="text-field"
+                                id="price"
+                                name="price"
+                                min="0"
+                                value="0"
+                                step=".01"
+                        /><br/>
+
+                        <label class="label-form" for="n_rev">Numero recensioni</label>
+                        <input
+                                type="number" class="text-field"
+                                id="n_rev"
+                                name="n_rev"
+                                min="0"
+                                value="0"
+                                step="1"
+                        /><br/>
+
+                        <label class="label-form" for="rating">Rating</label>
+                        <input
+                                type="number" class="text-field"
+                                id="rating"
+                                name="rating"
+                                min="0"
+                                max="100"
+                                value="0"
+                                step="1"
+                        /><br/>
+
+                        <label class="label-form" for="categories"
+                        >Categorie (scelta multipla)</label
+                        >
+                        <select name="categories" class="text-field" id="categories" multiple required>
+                            <option value="Single Player">Single Player</option>
+                            <option value="Online PvP">Online PvP</option>
+                            <option value="Trading Cards">Trading Cards</option>
+                            <option value="MMO">MMO</option>
+                            <option value="Online Co-op">Online Co-op</option>
+                            <option value="Cross-Platform">Cross-Platform</option>
+                            <option value="Multiplayer">Multiplayer</option>
+                            <option value="In-App Purchases">In-App Purchases</option>
+                            <option value="Steam Achievements">Steam Achievements</option>
+                            <option value="Shared/Split Screen">Shared/Split Screen</option>
+                            <option value="LAN Co-op">LAN Co-op</option>
+                            <option value="Remote Play">Remote Play</option>
+                            <option value="Full controller">Full controller</option>
+                            <option value="Steam Cloud">Steam Cloud</option>
+                            <option value="Partial Controller">Partial Controller</option>
+                        </select>
+                    </div>
+
+                    <div class="form-fields">
+                        <label class="label-form" for="pegi">PEGI</label><br/>
+                        <div id="pegi">
+                            <input
+                                    type="radio"
+                                    id="mature"
+                                    value="Mature 17+"
+                                    name="pegi"
+                            />
+                            <label for="mature">Mature 17+</label><br/>
+                            <input
+                                    type="radio"
+                                    id="everyone"
+                                    value="Everyone"
+                                    name="pegi"
+                                    checked="checked"
+                            />
+                            <label for="everyone">Everyone</label><br/>
+                            <input type="radio" id="teen" value="Teen" name="pegi"/>
+                            <label for="teen">Teen</label><br/>
+                            <input
+                                    type="radio"
+                                    id="ten-plus"
+                                    value="Everyone 10+"
+                                    name="pegi"
+                            />
+                            <label for="ten-plus">Everyone 10+</label><br/>
+                            <input
+                                    type="radio"
+                                    id="pending"
+                                    value="Rating Pending"
+                                    name="pegi"
+                            />
+                            <label for="pending">Rating Pending</label><br/>
+                            <input
+                                    type="radio"
+                                    id="adults"
+                                    value="Adults Only 18+"
+                                    name="pegi"
+                            />
+                            <label for="adults">Adults Only 18+</label><br/>
+                            <input
+                                    type="radio"
+                                    id="early"
+                                    value="Early Childhood"
+                                    name="pegi"
+                            />
+                            <label for="early">Early Childhood</label><br/>
+                            <input
+                                    type="radio"
+                                    id="china"
+                                    value="Everyone (China)"
+                                    name="pegi"
+                            />
+                            <label for="china">Everyone (China)</label><br/>
+                        </div>
+                    </div>
                 </div>
-                <br />
-                <label class="label-form" for="img_url"
-                  >Immagine di copertina (URL)</label
-                >
-                <input type="text" class = "text-field" id="img_url" name="img_url" /><br />
-              </div>
-
-              <div class="form-fields">
-                <label class="label-form" for="price">Prezzo</label>
-                <input
-                  type="number" class = "text-field"
-                  id="price"
-                  name="price"
-                  min="0"
-                  value="0"
-                  step=".01"
-                /><br />
-
-                <label class="label-form" for="n_rev">Numero recensioni</label>
-                <input
-                  type="number" class = "text-field"
-                  id="n_rev"
-                  name="n_rev"
-                  min="0"
-                  value="0"
-                  step="1"
-                /><br />
-
-                <label class="label-form" for="rating">Rating</label>
-                <input
-                  type="number" class = "text-field"
-                  id="rating"
-                  name="rating"
-                  min="0"
-                  max="100"
-                  value="0"
-                  step="1"
-                /><br />
-
-                <label class="label-form" for="categories"
-                  >Categorie (scelta multipla)</label
-                >
-                <select name="categories" class = "text-field" id="categories" multiple required>
-                  <option value="Single Player">Single Player</option>
-                  <option value="Online PvP">Online PvP</option>
-                  <option value="Trading Cards">Trading Cards</option>
-                  <option value="MMO">MMO</option>
-                  <option value="Online Co-op">Online Co-op</option>
-                  <option value="Cross-Platform">Cross-Platform</option>
-                  <option value="Multiplayer">Multiplayer</option>
-                  <option value="In-App Purchases">In-App Purchases</option>
-                  <option value="Steam Achievements">Steam Achievements</option>
-                  <option value="Shared/Split Screen">Shared/Split Screen</option>
-                  <option value="LAN Co-op">LAN Co-op</option>
-                  <option value="Remote Play">Remote Play</option>
-                  <option value="Full controller">Full controller</option>
-                  <option value="Steam Cloud">Steam Cloud</option>
-                  <option value="Partial Controller">Partial Controller</option>
-                </select>
-              </div>
-
-              <div class="form-fields">
-                <label class="label-form" for="pegi">PEGI</label><br />
-                <div id="pegi">
-                  <input
-                    type="radio"
-                    id="mature"
-                    value="Mature 17+"
-                    name="pegi"
-                  />
-                  <label for="mature">Mature 17+</label><br />
-                  <input
-                    type="radio"
-                    id="everyone"
-                    value="Everyone"
-                    name="pegi"
-                    checked="checked"
-                  />
-                  <label for="everyone">Everyone</label><br />
-                  <input type="radio" id="teen" value="Teen" name="pegi" />
-                  <label for="teen">Teen</label><br />
-                  <input
-                    type="radio"
-                    id="ten-plus"
-                    value="Everyone 10+"
-                    name="pegi"
-                  />
-                  <label for="ten-plus">Everyone 10+</label><br />
-                  <input
-                    type="radio"
-                    id="pending"
-                    value="Rating Pending"
-                    name="pegi"
-                  />
-                  <label for="pending">Rating Pending</label><br />
-                  <input
-                    type="radio"
-                    id="adults"
-                    value="Adults Only 18+"
-                    name="pegi"
-                  />
-                  <label for="adults">Adults Only 18+</label><br />
-                  <input
-                    type="radio"
-                    id="early"
-                    value="Early Childhood"
-                    name="pegi"
-                  />
-                  <label for="early">Early Childhood</label><br />
-                  <input
-                    type="radio"
-                    id="china"
-                    value="Everyone (China)"
-                    name="pegi"
-                  />
-                  <label for="china">Everyone (China)</label><br />
-                </div>
-              </div>
-            </div>
-            <button type="submit" class="query-button">Inserisci</button>
-          </form>
+                <button type="submit" class="query-button">Inserisci</button>
+            </form>
         </div>
-      </div>
-
-      <div class="query-container">
-        <div class="query-title">Ricerca rapporto Rating/Recensioni ordinati per prezzo</div>
-        <h4 class = "info-box"> Ricerca i 50 giochi migliori in termini di rapporto tra rating e numero di recensioni,
-        ordinati per prezzo crescente</h4>
-        <form action="/query/find_by_rating_ratio" method="post">
-          <div class="query-1">
-            <button type="submit" class="query-button">Ricerca</button>
-          </div>
-        </form>
-      </div>
     </div>
-  </body>
+
+    <div class="query-container">
+        <div class="query-title">Ricerca rapporto Rating/Recensioni ordinati per prezzo</div>
+        <h4 class="info-box"> Ricerca i 50 giochi migliori in termini di rapporto tra rating e numero di recensioni,
+            ordinati per prezzo crescente</h4>
+        <form action="/query/find_by_rating_ratio" method="post">
+            <div class="query-1">
+                <button type="submit" class="query-button">Ricerca</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
 </html>

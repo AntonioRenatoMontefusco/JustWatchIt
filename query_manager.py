@@ -93,6 +93,10 @@ def find_by_rating(rating):
     return collection.find({"rating": {'$lt': rating_id}})
 
 
+def find_by_genres(genre):
+    return list(collection.find({"genres": {'$regex': ".*" + genre + ".*", "$options": "i"}}))
+
+
 def find_by_rating_less_than(age):
     db = collection.find()
     for row in list(db):

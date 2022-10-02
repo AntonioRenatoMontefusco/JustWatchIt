@@ -36,14 +36,6 @@ a:visited {
     color: white;
 }
 
-.gameurl {
-    text-decoration: none;
-    color: #071120;
-}
-
-.gameurl:visited {
-    color: #071120;
-}
 
 #home {
     height: 100vh;
@@ -149,6 +141,10 @@ a:visited {
     font-size: 0.96em;
 }
 
+.text-field-upd {
+    width: 400px
+}
+
 .form-text {
     padding-right: 20px;
 }
@@ -233,4 +229,9 @@ a:visited {
 
 table {
     text-align: center;
+}
+
+textarea{
+    width: 398px;
+    height: 110px;
 }

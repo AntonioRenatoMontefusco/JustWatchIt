@@ -48,7 +48,9 @@
         <td> {{ row.present_in }}           </td>
         <td style="width: 200px">
             <form method="post"  action="/query/show_update">
-                <input type="hidden" name="url"  value="{{row.url}}" />
+                <input type="hidden" name="title"  value="{{row.title}}" />
+                <input type="hidden" name="year"   value="{{row.release_year}}" />
+
                 <button type="submit" class="modify-button">Modifica</button>
             </form>
         </td>

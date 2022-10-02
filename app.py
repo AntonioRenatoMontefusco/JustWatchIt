@@ -31,5 +31,14 @@ def find_by_year():
     return json.dumps({"ok": True})
 
 
+@app.route("/query/show_update", methods=['POST'])
+def show_update():
+    title = request.form["title"]
+    year = request.form["year"]
+
+    res = query.find_by_title_and_year(title=title, year=year)
+    return render_template('/update.html', element=res)
+
+
 if __name__ == '__main__':
     app.run()

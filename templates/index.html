@@ -105,8 +105,8 @@
     </div>
     <div class="query-container">
         <div class="query-title">Ricerca una Serie TV per il numero di stagioni</div>
-        <h4 class="info-box"> Mostra le stagioni con il numero di stagioni inserite </h4>
-        <form action="/query/find_orderby_price" method="post">
+        <h4 class="info-box"> Mostra le serie Tv con al massimo numero di stagioni inserite </h4>
+        <form action="/query/find_series_by_at_least_season_count" method="post">
             <input type="number" class="text-field" step="1" name="seasons" required/>
             <button type="submit" class="query-button">Ricerca</button>
         </form>
@@ -145,19 +145,20 @@
     <div class="query-container">
         <div class="query-title">Ricerca per Rating</div>
         <h4 class="info-box"> Ricerca Film o Serie TV con rating minore di quello inserito</h4>
-        <form action="/query/find_by_pegi" method="post">
+        <form action="/query/find_by_rating" method="post">
             <div class="query-1">
                 <div class="form-row">
-                    <div class="form-text">PEGI</div>
-                    <select name="pegi_type" class="text-field" id="pegi_type" required>
-                        <option value="Mature 17+">Mature 17+</option>
-                        <option value="Everyone">Everyone</option>
-                        <option value="Teen">Teen</option>
-                        <option value="Everyone 10+">Everyone 10+</option>
-                        <option value="Rating Pending">Rating Pending</option>
-                        <option value="Adults Only 18+">Adults Only 18+</option>
-                        <option value="Early Childhood">Early Childhood</option>
-                        <option value="Everyone (China)">Everyone (China)</option>
+                    <div class="form-text">Rating</div>
+                    <select name="rating" class="text-field" id="rating" required>
+                        <option value="0">General</option>
+                        <option value="1">Children Over 7</option>
+                        <option value="2">Children Over 11</option>
+                        <option value="3">Parental Guidance Under 13</option>
+                        <option value="4">Children Over 16</option>
+                        <option value="5">Parental Guidance Under 17</option>
+                        <option value="6">Under 17 Not Admitted</option>
+                        <option value="7">Over 18</option>
+                        <option value="8">Not Rated</option>
                     </select>
                 </div>
                 <button type="submit" class="query-button">Ricerca</button>
@@ -167,7 +168,11 @@
     <div class="query-container">
         <div class="query-title">Ricerca ordinata per data di uscita</div>
         <h4 class="info-box"> Mostra il database ordinato per data di uscita</h4>
-        <form action="/query/find_orderby_rating" method="post">
+        <form action="/query/find_orderby_date" method="post">
+            <select name="order" class="text-field" id="order" required>
+                <option value="-1">Decrescente</option>
+                <option value="1">Crescente</option>
+            </select>
             <button type="submit" class="query-button">Ricerca</button>
         </form>
     </div>

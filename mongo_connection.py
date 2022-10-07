@@ -5,7 +5,7 @@ import pandas as pd
 # define connection pool
 def mongo_connection():
     client = pymongo.MongoClient("mongodb://localhost:27017/")
-    create_rating_collection()
+    #create_rating_collection()
     collection = client["JustWatchIT"]["JustWatchIT"]
     return collection
 
@@ -45,7 +45,7 @@ def create_rating_collection():
                'Parental Guidance Under 17', 'Under 17 Not Admitted', 'Over 18', 'Not Rated']
     for i in indexes:
         element = {
-            "id": i,
+            "_id": i,
             "rating": ratings[i]
         }
         collection.insert_one(element)

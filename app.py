@@ -22,8 +22,6 @@ def find_by_type():
     return json.dumps({"ok": True})
 
 
-
-
 @app.route("/query/show_update", methods=['POST'])
 def show_update():
     title = request.form["title"]
@@ -48,8 +46,9 @@ def find_by_title():
         title = request.form['title']
         results = query.find_by_title(title)
         return render_template('/query.html', results=results, size=len(results),
-                               title="Ricerca per titolo: " + title )
+                               title="Ricerca per titolo: " + title)
     return json.dumps({"ok": True})
+
 
 @app.route("/query/find_by_year", methods=['POST'])
 def find_by_year():
@@ -59,17 +58,52 @@ def find_by_year():
         return render_template('/query.html', results=results, size=len(results), title="Ricerca per anno: " + year)
     return json.dumps({"ok": True})
 
+@app.route("/query/find_by_year_range", methods=['POST'])
+def find_by_year_range():
+    if request.method == 'POST':
+        min = request.form['min_year']
+        max = request.form['max_year']
+        results = query.find_by_year_range(min,max)
+        return render_template('/query.html', results=results, size=len(results), title="Ricerca tra: " + min+" e "+max)
+    return json.dumps({"ok": True})
 
 @app.route("/query/find_by_director", methods=['POST'])
 def find_by_director():
     if request.method == 'POST':
         director = request.form['director']
         results = query.find_by_director(director)
-        return render_template('/query.html', results=results, size=len(results), title="Ricerca per regista: " + director)
+        return render_template('/query.html', results=results, size=len(results),
+                               title="Ricerca per regista: " + director)
     return json.dumps({"ok": True})
 
 
 
+@app.route("/query/find_series_by_at_least_season_count", methods=['POST'])
+def find_series_by_at_least_season_count():
+    if request.method == 'POST':
+        seasons = request.form['seasons']
+        results = query.find_series_by_at_least_season_count(seasons)
+        return render_template('/query.html', results=results, size=len(results),
+                               title="Ricerca per numero di stagioni: " + seasons)
+    return json.dumps({"ok": True})
+
+@app.route("/query/find_by_rating", methods=['POST'])
+def find_by_rating():
+    if request.method == 'POST':
+        rating = request.form['rating']
+        results = query.find_by_rating(rating)
+        return render_template('/query.html', results=results, size=len(results),
+                               title="Ricerca per numero di stagioni: " + rating)
+    return json.dumps({"ok": True})
+
+@app.route("/query/find_orderby_date", methods=['POST'])
+def find_orderby_date():
+    if request.method == 'POST':
+        order = request.form['order']
+        results = query.find_orderby_date(order)
+        return render_template('/query.html', results=results, size=len(results),
+                               title="Ricerca ordinata per anno di uscita: " + order)
+    return json.dumps({"ok": True})
 
 if __name__ == '__main__':
     app.run()

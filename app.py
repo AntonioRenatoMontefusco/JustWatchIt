@@ -58,14 +58,17 @@ def find_by_year():
         return render_template('/query.html', results=results, size=len(results), title="Ricerca per anno: " + year)
     return json.dumps({"ok": True})
 
+
 @app.route("/query/find_by_year_range", methods=['POST'])
 def find_by_year_range():
     if request.method == 'POST':
         min = request.form['min_year']
         max = request.form['max_year']
-        results = query.find_by_year_range(min,max)
-        return render_template('/query.html', results=results, size=len(results), title="Ricerca tra: " + min+" e "+max)
+        results = query.find_by_year_range(min, max)
+        return render_template('/query.html', results=results, size=len(results),
+                               title="Ricerca tra: " + min + " e " + max)
     return json.dumps({"ok": True})
+
 
 @app.route("/query/find_by_director", methods=['POST'])
 def find_by_director():
@@ -77,7 +80,6 @@ def find_by_director():
     return json.dumps({"ok": True})
 
 
-
 @app.route("/query/find_series_by_at_least_season_count", methods=['POST'])
 def find_series_by_at_least_season_count():
     if request.method == 'POST':
@@ -86,6 +88,7 @@ def find_series_by_at_least_season_count():
         return render_template('/query.html', results=results, size=len(results),
                                title="Ricerca per numero di stagioni: " + seasons)
     return json.dumps({"ok": True})
+
 
 @app.route("/query/find_by_rating", methods=['POST'])
 def find_by_rating():
@@ -96,14 +99,19 @@ def find_by_rating():
                                title="Ricerca per numero di stagioni: " + rating)
     return json.dumps({"ok": True})
 
+
 @app.route("/query/find_orderby_date", methods=['POST'])
 def find_orderby_date():
     if request.method == 'POST':
         order = request.form['order']
-        results = query.find_orderby_date(order)
+        limit = int(request.form['limit'])
+        page = int(request.form['page'])
+        results = query.find_orderby_date_limited(order, limit, page)
+        ordination = "decrescente" if order == 1 else "decrescente"
         return render_template('/query.html', results=results, size=len(results),
-                               title="Ricerca ordinata per anno di uscita: " + order)
+                               title="Ricerca ordinata per anno di uscita " + ordination)
     return json.dumps({"ok": True})
+
 
 if __name__ == '__main__':
     app.run()

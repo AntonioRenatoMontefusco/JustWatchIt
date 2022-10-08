@@ -109,8 +109,15 @@ def find_by_cast(cast):
 def find_by_genres(genre):
     return list(collection.find({"genres": {'$regex': ".*" + genre + ".*", "$options": "i"}}))
 
+
 def find_orderby_date(order):
-    return list(collection.find().sort("release_year",order))
+    return list(collection.find().sort("release_year", int(order)))
+
+
+def find_orderby_date_limited(order, limit, page):
+    result = collection.find().sort("release_year", int(order)).skip(limit*page).limit(limit)
+    return list(result)
+
 
 def find_by_rating_less_than(age):
     db = collection.find()

@@ -5,11 +5,24 @@
     <meta charset="UTF-8">
     <script type = "text/javascript" src = "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
     </script>
+        <script src="{{ url_for('static',filename='script/query.js') }}"></script>
+
     <title>Query Results</title>
 </head>
 <body>
 <div style="margin-left: 5%; margin-top: 2%; margin-right: 5%">
-<h1 style="margin-bottom: 4%">{{ title }}. Numero di elementi trovati: {{ size }}</h1>
+<h1 style="margin-bottom: 4%">{{ title }}. Numero di elementi trovati: {{ size }}, Pagina {{ page }} di  {{ max_pages }}</h1>
+
+<input type="hidden" value="{{ max_pages }}" id="max_pages">
+
+<form action="/query/change_page" method="post">
+    <input type="hidden" value="{{ page }}" id="page" name="page">
+    <input type="hidden" value="" id="modifier" name="modifier">
+    <input type="submit" class="pagination" id="prev" value="&lt">
+    <input type="submit" class="pagination" id="next" value="&gt">
+</form>
+
+
 <table id="results-table">
     <thead>
     <tr>

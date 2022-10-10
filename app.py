@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from dataCleaning import main_proc
 import query_manager as query
 import json
+import global_param
 
 app = Flask(__name__)
 
@@ -54,8 +55,35 @@ def find_by_title():
 def find_by_year():
     if request.method == 'POST':
         year = request.form['year']
-        results = query.find_by_year(year)
-        return render_template('/query.html', results=results, size=len(results), title="Ricerca per anno: " + year)
+        global_param.query_result = query.find_by_year(year)
+        global_param.title = "Ricerca per anno: " + year
+        global_param.number_of_pages = int(len(global_param.query_result) / global_param.limit) +1
+        return render_template('/query.html', results=global_param.query_result[0:11],
+                               size=len(global_param.query_result), title=global_param.title, page=0,
+                               max_pages=global_param.number_of_pages)
+    return json.dumps({"ok": True})
+
+
+@app.route("/query/change_page", methods=['POST'])
+def change_page():
+    if request.method == 'POST':
+        page = int(request.form['page'])
+        modifier = int(request.form['modifier'])
+
+        start = 0
+        end = 0
+        if modifier == -1:
+            start = global_param.limit * (page - 1)
+            end = global_param.limit * page
+        else:
+            start = global_param.limit * page
+            end = global_param.limit * (page + 1)
+
+        return render_template('/query.html',
+                               results=global_param.query_result[
+                                       start: end + 1],
+                               size=len(global_param.query_result), title=global_param.title, page=page + modifier,
+                               max_pages=global_param.number_of_pages)
     return json.dumps({"ok": True})
 
 

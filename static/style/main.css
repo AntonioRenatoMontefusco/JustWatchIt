@@ -235,3 +235,75 @@ textarea{
     width: 398px;
     height: 110px;
 }
+
+.select-btn{
+    width:100%;
+    border: 1px solid #ced4da;
+      border-radius: .25rem;
+      position: relative;
+    border-top:none;
+  }
+  .select-btn-main{
+      padding: .49rem .75rem!important;
+      -webkit-appearance: menulist;
+      border-radius: .25rem;
+    border:0px;
+  }
+  .select-btn-main:after {
+      position: absolute;
+      content: "";
+      top: 17px;
+      right: 10px;
+      width: 0;
+      height: 0;
+      border: 6px solid transparent;
+      border-color: #000 transparent transparent transparent;
+  }
+  .select-btn li{
+      position: relative;
+      display: block;
+      padding: .2rem;
+      background-color: #fff;
+      border-top: .5px solid rgba(0,0,0,.1);
+  }
+  .select-btn button{
+      margin-right:.75rem;
+  }
+  .select-btn-main:focus {
+      color: #495057;
+      background-color: #fff;
+      border-color: #80bdff;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+  }
+  #select-btn-option{
+      display:block;
+      z-index: 2;
+      position: absolute;
+      top: 35px;
+      width: 100%;
+      border: 1px solid #000;
+      max-height:250px;
+      overflow:auto!important;
+  }
+  /*
+  #select-btn-option li:hover{
+      background: #1e90ff;
+      color: #fff;
+  }
+  */
+  #selectList li{
+    display: block;
+    padding: .2rem;
+  }
+  #selectList button{
+    margin-right: .75rem;
+  }
+
+  #selectListGen li{
+    display: block;
+    padding: .2rem;
+  }
+  #selectListGen button{
+    margin-right: .75rem;
+  }

@@ -17,9 +17,11 @@ def hello_world():
 def find_by_type():
     if request.method == 'POST':
         name = request.form['type']
-        results = query.filter_by_type(name)
-        return render_template('/query.html', results=results, size=len(results),
-                               title="Ricerca per tipologia: " + name)
+        global_param.query_result = query.filter_by_type(name)
+        global_param.number_of_pages = int(len(global_param.query_result) / global_param.limit) + 1
+        return render_template('/query.html', results=global_param.query_result[0:11],
+                               size=len(global_param.query_result), title=global_param.title, page=1,
+                               max_pages=global_param.number_of_pages)
     return json.dumps({"ok": True})
 
 
@@ -35,9 +37,11 @@ def show_update():
 def find_by_genre():
     if request.method == 'POST':
         genre = request.form['genre']
-        results = query.find_by_genres(genre)
-        return render_template('/query.html', results=results, size=len(results),
-                               title="Ricerca per genere: " + genre)
+        global_param.query_result = query.find_by_genres(genre)
+        global_param.number_of_pages = int(len(global_param.query_result) / global_param.limit) + 1
+        return render_template('/query.html', results=global_param.query_result[0:11],
+                               size=len(global_param.query_result), title=global_param.title, page=1,
+                               max_pages=global_param.number_of_pages)
     return json.dumps({"ok": True})
 
 
@@ -45,9 +49,12 @@ def find_by_genre():
 def find_by_title():
     if request.method == 'POST':
         title = request.form['title']
-        results = query.find_by_title(title)
-        return render_template('/query.html', results=results, size=len(results),
-                               title="Ricerca per titolo: " + title)
+        global_param.query_result = query.find_by_title(title)
+        global_param.title= "Ricerca per titolo:" + title
+        global_param.number_of_pages = int(len(global_param.query_result) / global_param.limit) + 1
+        return render_template('/query.html', results=global_param.query_result[0:11],
+                               size=len(global_param.query_result), title=global_param.title, page=1,
+                               max_pages=global_param.number_of_pages)
     return json.dumps({"ok": True})
 
 
@@ -59,7 +66,7 @@ def find_by_year():
         global_param.title = "Ricerca per anno: " + year
         global_param.number_of_pages = int(len(global_param.query_result) / global_param.limit) +1
         return render_template('/query.html', results=global_param.query_result[0:11],
-                               size=len(global_param.query_result), title=global_param.title, page=0,
+                               size=len(global_param.query_result), title=global_param.title, page=1,
                                max_pages=global_param.number_of_pages)
     return json.dumps({"ok": True})
 
@@ -92,9 +99,12 @@ def find_by_year_range():
     if request.method == 'POST':
         min = request.form['min_year']
         max = request.form['max_year']
-        results = query.find_by_year_range(min, max)
-        return render_template('/query.html', results=results, size=len(results),
-                               title="Ricerca tra: " + min + " e " + max)
+        global_param.title = "Ricerca tra il: " + min + "e il "+max
+        global_param.query_result = query.find_by_year_range(min, max)
+        global_param.number_of_pages = int(len(global_param.query_result) / global_param.limit) + 1
+        return render_template('/query.html', results=global_param.query_result[0:11],
+                               size=len(global_param.query_result), title=global_param.title, page=1,
+                               max_pages=global_param.number_of_pages)
     return json.dumps({"ok": True})
 
 
@@ -102,9 +112,12 @@ def find_by_year_range():
 def find_by_director():
     if request.method == 'POST':
         director = request.form['director']
-        results = query.find_by_director(director)
-        return render_template('/query.html', results=results, size=len(results),
-                               title="Ricerca per regista: " + director)
+        global_param.title = "Ricerca per regista:"+director
+        global_param.query_result = query.find_by_director(director)
+        global_param.number_of_pages = int(len(global_param.query_result) / global_param.limit) + 1
+        return render_template('/query.html', results=global_param.query_result[0:11],
+                               size=len(global_param.query_result), title=global_param.title, page=1,
+                               max_pages=global_param.number_of_pages)
     return json.dumps({"ok": True})
 
 
@@ -112,9 +125,12 @@ def find_by_director():
 def find_series_by_at_least_season_count():
     if request.method == 'POST':
         seasons = request.form['seasons']
-        results = query.find_series_by_at_least_season_count(seasons)
-        return render_template('/query.html', results=results, size=len(results),
-                               title="Ricerca per numero di stagioni: " + seasons)
+        global_param.title = "Ricerca per numero di stagioni:" + seasons
+        global_param.query_result = query.find_series_by_at_least_season_count(seasons)
+        global_param.number_of_pages = int(len(global_param.query_result) / global_param.limit) + 1
+        return render_template('/query.html', results=global_param.query_result[0:11],
+                               size=len(global_param.query_result), title=global_param.title, page=1,
+                               max_pages=global_param.number_of_pages)
     return json.dumps({"ok": True})
 
 
@@ -122,9 +138,12 @@ def find_series_by_at_least_season_count():
 def find_by_rating():
     if request.method == 'POST':
         rating = request.form['rating']
-        results = query.find_by_rating(rating)
-        return render_template('/query.html', results=results, size=len(results),
-                               title="Ricerca per numero di stagioni: " + rating)
+        global_param.title = "Ricerca per rating:" + rating
+        global_param.query_result = query.find_by_rating(rating)
+        global_param.number_of_pages = int(len(global_param.query_result) / global_param.limit) + 1
+        return render_template('/query.html', results=global_param.query_result[0:11],
+                               size=len(global_param.query_result), title=global_param.title, page=1,
+                               max_pages=global_param.number_of_pages)
     return json.dumps({"ok": True})
 
 
@@ -132,12 +151,12 @@ def find_by_rating():
 def find_orderby_date():
     if request.method == 'POST':
         order = request.form['order']
-        limit = int(request.form['limit'])
-        page = int(request.form['page'])
-        results = query.find_orderby_date_limited(order, limit, page)
-        ordination = "decrescente" if order == 1 else "decrescente"
-        return render_template('/query.html', results=results, size=len(results),
-                               title="Ricerca ordinata per anno di uscita " + ordination)
+        global_param.title = "Ricerca ordinata per data:" + "decrescente" if order==1 else "ascendente"
+        global_param.query_result = query.find_orderby_date(order)
+        global_param.number_of_pages = int(len(global_param.query_result) / global_param.limit) + 1
+        return render_template('/query.html', results=global_param.query_result[0:11],
+                               size=len(global_param.query_result), title=global_param.title, page=1,
+                               max_pages=global_param.number_of_pages)
     return json.dumps({"ok": True})
 
 

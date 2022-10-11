@@ -9,7 +9,7 @@ $(document).ready(function() {
 
             if(clicked === "next" && ( 1 + parseInt(curr_page)) <= max_pages )
                 $('#modifier').val("+1");
-            else if(clicked === "prev" && (-1 + parseInt(curr_page)) >= 0)
+            else if(clicked === "prev" && (-1 + parseInt(curr_page)) >= 1)
                 $('#modifier').val("-1");
             else{
                 event.preventDefault();

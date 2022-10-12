@@ -20,7 +20,7 @@
 <div class="query-container-form" style="margin-left: 16.5%">
     <div class="query-title" style="margin-top: 10px">Modifica dati del gioco</div>
     <div id="form-container">
-        <form action="/query/update_game" method="post"
+        <form action="/query/update" method="post"
               style="display:flex; flex-direction: column; margin-bottom: 30px" id = "theForm">
             <div style="display:flex; flex-direction: row">
                 <div class="form-fields">
@@ -55,9 +55,10 @@
                     <label class="label-form" for="date_added">Data di aggiunta a catalogo</label>
                     <input type="date" class="text-field text-field-upd" id="date_added" name = "date_added"
                            value="{{ element.date_added }}"><br>
+                    <input type="hidden" id="date_added_hidden" value="{{ element.date_added }}">
 
                     <label class="label-form" for="release_year">Anno di uscita</label>
-                    <input type="date" class="text-field text-field-upd" id="release_year" name = "release_year"
+                    <input type="number" class="text-field text-field-upd" id="release_year" name = "release_year"
                            value="{{ element.release_year }}"><br>
 
                     <input type="hidden" value=" {{ element.rating }} " id="ratingValue"> 

@@ -64,7 +64,7 @@ def insert(type, title, director, cast, locations, data_added, release_year, rat
     collection.insert_one(new_row)
 
 
-def modify(type, title, director, cast, locations, data_added, release_year, rating, genres, description,
+def modify(type, title, director, cast, locations, date_added, release_year, rating, genres, description,
            present_in):
     new_row = {"$set": {
         'type': type,
@@ -72,7 +72,7 @@ def modify(type, title, director, cast, locations, data_added, release_year, rat
         'director': director,
         'cast': cast,
         'locations': locations,
-        'data_added': data_added,
+        'date_added': date_added,
         'release_year': release_year,
         'rating': rating,
         'genres': genres,

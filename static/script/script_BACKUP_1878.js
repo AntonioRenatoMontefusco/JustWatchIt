@@ -78,7 +78,11 @@ $(document).ready(function () {
 
     var genresValue = $("#genresValue").val();
     let values = genresValue.split(",").map(element => {
+<<<<<<< Updated upstream
       return  element.trim().replaceAll(" ","");
+=======
+        return element.trim().replace(" ", "\\");
+>>>>>>> Stashed changes
     });
 
     for (i in values) {
@@ -94,7 +98,11 @@ $(document).ready(function () {
     var platformsValue = $("#platformsValue").val();
 
     let valuesPla = platformsValue.split(",").map(element => {
+<<<<<<< Updated upstream
       return element.trim().replaceAll(" ","");
+=======
+        return element.trim().replaceAll(" ", "\\");
+>>>>>>> Stashed changes
     });
 
     for (j in valuesPla) {

@@ -81,7 +81,7 @@ $(document).ready(function() {
 
     var genresValue =  $("#genresValue").val();
     let values = genresValue.split(",").map(element => {
-      return  element.trim().replace(" ","\\");
+      return  element.trim().replaceAll(" ","");
     });
     
     for(i in values){
@@ -97,7 +97,7 @@ $(document).ready(function() {
     var platformsValue =  $("#platformsValue").val();
 
     let valuesPla = platformsValue.split(",").map(element => {
-      return element.trim().replaceAll(" ","\\");
+      return element.trim().replaceAll(" ","");
     });
     
     for(j in valuesPla){
@@ -108,6 +108,9 @@ $(document).ready(function() {
       $('#selectListGen i').removeClass('fa-plus');
       $('#selectListGen i').addClass("fa-remove");
     }
+
+    let elem = $('#ratingValue').val().trim();
+    $('#rating').val(elem);
 
 })
 

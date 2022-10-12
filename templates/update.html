@@ -25,12 +25,12 @@
             <div style="display:flex; flex-direction: row">
                 <div class="form-fields">
                     <label class="label-form" for="type">Tipologia</label>
-                    <input type="text" class="text-field text-field-upd" id="name" name="name" required
+                    <input type="text" class="text-field text-field-upd" id="name" name="type" required
                            value="{{ element.type }}"><br>
 
                     <label class="label-form" for="title">Titolo</label>
                     <input type="text" class="text-field text-field-upd" id="titolo" value="{{ element.title }}"
-                           name="titolo" required><br>
+                           name="title" required><br>
 
                     <label class="label-form" for="description">Descrizione</label>
                     <textarea class="text-field text-field-upd" id="description" name="description"
@@ -60,8 +60,21 @@
                     <input type="date" class="text-field text-field-upd" id="release_year" name = "release_year"
                            value="{{ element.release_year }}"><br>
 
+                    <input type="hidden" value=" {{ element.rating }} " id="ratingValue"> 
+
                     <label class="label-form" for="rating">Rating</label>
-                    <input type="text" class="text-field text-field-upd" id="rating" value="{{ element.rating }}" name = "rating"><br>
+                    <select name="rating" class="text-field" id="rating" required>
+                      <option value="0">General</option>
+                      <option value="1">Children Over 7</option>
+                      <option value="2">Children Over 11</option>
+                      <option value="3">Parental Guidance Under 13</option>
+                      <option value="4">Children Over 16</option>
+                      <option value="5">Parental Guidance Under 17</option>
+                      <option value="6">Under 17 Not Admitted</option>
+                      <option value="7">Over 18</option>
+                      <option value="8">Not Rated</option>
+                  </select>
+                  <br>
 
                     <label class="label-form" for="film_duration">Durata del film</label>
                     <input type="text" class="text-field text-field-upd" id="film_duration" name = "film_duration"
@@ -85,15 +98,15 @@
               <div class="select-btn mb-2" style ="height:300px; overflow:scroll;">
                 <li tabindex="0" class="select-btn-main">Select Platforms</li>
               <div class="select-btn-option-gen">
-                  <li><button type="button" class="btn btn-secondary btn-sm"id="Amazon Prime Video"> <i class="fa fa-plus"></i></button>Amazon Prime Video</li>
+                  <li><button type="button" class="btn btn-secondary btn-sm"id="AmazonPrimeVideo"> <i class="fa fa-plus"></i></button>Amazon Prime Video</li>
                   <li><button type="button" class="btn btn-secondary btn-sm"id="Hulu"> <i class="fa fa-plus"></i></button>Hulu</li>
-                  <li><button type="button" class="btn btn-secondary btn-sm"id="Disney +"> <i class="fa fa-plus"></i></button>Disney +</li>
+                  <li><button type="button" class="btn btn-secondary btn-sm"id="Disney+"> <i class="fa fa-plus"></i></button>Disney +</li>
                   <li><button type="button" class="btn btn-secondary btn-sm"id="Netflix" > <i class="fa fa-plus"></i></button>Netflix</li>
               </div>
               </div>
                 </div>
                 <div class="col-md-6">
-                <h2>Genres selected</h2>
+                <h2>Platforms selected</h2>
                 <hr>
                 <div id="selectListGen">
                   </div>
@@ -111,7 +124,7 @@
                 <li><button type="button" class="btn btn-secondary btn-sm" > <i class="fa fa-plus"></i></button>Crime</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Action"> <i class="fa fa-plus"></i></button>Action</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Sports"> <i class="fa fa-plus"></i></button>Sports</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Talk Show and Variety" > <i class="fa fa-plus"></i></button>Talk Show and Variety</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TalkShowandVariety" > <i class="fa fa-plus"></i></button>Talk Show and Variety</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Historical"     > <i class="fa fa-plus"></i></button>Historical</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Spy/Espionage"  > <i class="fa fa-plus"></i></button>Spy/Espionage</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Animation"      > <i class="fa fa-plus"></i></button>Animation</li>
@@ -120,179 +133,179 @@
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Superhero"      > <i class="fa fa-plus"></i></button>Superhero</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Buddy" > <i class="fa fa-plus"></i></button>Buddy</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Fantasy"        > <i class="fa fa-plus"></i></button>Fantasy</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Science Fiction"> <i class="fa fa-plus"></i></button>Science Fiction</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Kids' TV"       > <i class="fa fa-plus"></i></button>Kids' TV</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="ScienceFiction"> <i class="fa fa-plus"></i></button>Science Fiction</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Kids'TV"       > <i class="fa fa-plus"></i></button>Kids' TV</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Documentary"    > <i class="fa fa-plus"></i></button>Documentary</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Stand Up"       > <i class="fa fa-plus"></i></button>Stand Up</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="StandUp"       > <i class="fa fa-plus"></i></button>Stand Up</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Western"        > <i class="fa fa-plus"></i></button>Western</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Concert Film"   > <i class="fa fa-plus"></i></button>Concert Film</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Talk Show"      > <i class="fa fa-plus"></i></button>Talk Show</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="ConcertFilm"   > <i class="fa fa-plus"></i></button>Concert Film</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TalkShow"      > <i class="fa fa-plus"></i></button>Talk Show</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Travel"> <i class="fa fa-plus"></i></button>Travel</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="LGBTQ+"> <i class="fa fa-plus"></i></button>LGBTQ+</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Romantic Movies"> <i class="fa fa-plus"></i></button>Romantic Movies</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Classic & Cult TV"     > <i class="fa fa-plus"></i></button>Classic & Cult TV</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Game Show / Competition"        > <i class="fa fa-plus"></i></button>Game Show / Competition</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Faith and Spirituality"> <i class="fa fa-plus"></i></button>Faith and Spirituality</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Animals & Nature"      > <i class="fa fa-plus"></i></button>Animals & Nature</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="RomanticMovies"> <i class="fa fa-plus"></i></button>Romantic Movies</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Classic&Cult TV"     > <i class="fa fa-plus"></i></button>Classic & Cult TV</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Game Show/Competition"        > <i class="fa fa-plus"></i></button>Game Show / Competition</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="FaithandSpirituality"> <i class="fa fa-plus"></i></button>Faith and Spirituality</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Animals&Nature"      > <i class="fa fa-plus"></i></button>Animals & Nature</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Music" > <i class="fa fa-plus"></i></button>Music</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Music Videos and Concerts"      > <i class="fa fa-plus"></i></button>Music Videos and Concerts</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Military and War"      > <i class="fa fa-plus"></i></button>Military and War</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="MusicVideosandConcerts"      > <i class="fa fa-plus"></i></button>Music Videos and Concerts</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="MilitaryandWar"      > <i class="fa fa-plus"></i></button>Military and War</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Fantasy"        > <i class="fa fa-plus"></i></button>Fantasy</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Police/Cop"     > <i class="fa fa-plus"></i></button>Police/Cop</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Variety"        > <i class="fa fa-plus"></i></button>Variety</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Horror Movies"  > <i class="fa fa-plus"></i></button>Horror Movies</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Independent Movies"    > <i class="fa fa-plus"></i></button>Independent Movies</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="HorrorMovies"  > <i class="fa fa-plus"></i></button>Horror Movies</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="IndependentMovies"    > <i class="fa fa-plus"></i></button>Independent Movies</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Documentaries"  > <i class="fa fa-plus"></i></button>Documentaries</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Classic Movies" > <i class="fa fa-plus"></i></button>Classic Movies</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="ClassicMovies" > <i class="fa fa-plus"></i></button>Classic Movies</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Lifestyle"      > <i class="fa fa-plus"></i></button>Lifestyle</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Sports Movies"  > <i class="fa fa-plus"></i></button>Sports Movies</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Independent Movies"    > <i class="fa fa-plus"></i></button>Independent Movies</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="SportsMovies"  > <i class="fa fa-plus"></i></button>Sports Movies</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="IndependentMovies"    > <i class="fa fa-plus"></i></button>Independent Movies</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="News"  > <i class="fa fa-plus"></i></button>News</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Variety"        > <i class="fa fa-plus"></i></button>Variety</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Black Stories"  > <i class="fa fa-plus"></i></button>Black Stories</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Anime Series"   > <i class="fa fa-plus"></i></button>Anime Series</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Adult Animation"> <i class="fa fa-plus"></i></button>Adult Animation</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Faith & Spirituality"  > <i class="fa fa-plus"></i></button>Faith & Spirituality</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Military and War"      > <i class="fa fa-plus"></i></button>Military and War</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Coming of Age"  > <i class="fa fa-plus"></i></button>Coming of Age</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Children & Family Movies"       > <i class="fa fa-plus"></i></button>Children & Family Movies</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Romantic Comedy"> <i class="fa fa-plus"></i></button>Romantic Comedy</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="BlackStories"  > <i class="fa fa-plus"></i></button>Black Stories</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="AnimeSeries"   > <i class="fa fa-plus"></i></button>Anime Series</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="AdultAnimation"> <i class="fa fa-plus"></i></button>Adult Animation</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Faith&Spirituality"  > <i class="fa fa-plus"></i></button>Faith & Spirituality</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="MilitaryandWar"      > <i class="fa fa-plus"></i></button>Military and War</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="ComingofAge"  > <i class="fa fa-plus"></i></button>Coming of Age</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Children&FamilyMovies"       > <i class="fa fa-plus"></i></button>Children & Family Movies</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="RomanticComedy"> <i class="fa fa-plus"></i></button>Romantic Comedy</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Mystery"        > <i class="fa fa-plus"></i></button>Mystery</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Science Fiction"> <i class="fa fa-plus"></i></button>Science Fiction</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="ScienceFiction"> <i class="fa fa-plus"></i></button>Science Fiction</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="International"  > <i class="fa fa-plus"></i></button>International</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Cooking & Food" > <i class="fa fa-plus"></i></button>Cooking & Food</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Coming of Age"  > <i class="fa fa-plus"></i></button>Coming of Age</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Cooking&Food" > <i class="fa fa-plus"></i></button>Cooking & Food</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="ComingofAge"  > <i class="fa fa-plus"></i></button>Coming of Age</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Romance"        > <i class="fa fa-plus"></i></button>Romance</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Anthology"      > <i class="fa fa-plus"></i></button>Anthology</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Music Videos and Concerts      > <i class="fa fa-plus"></i></button>Music Videos and Concerts</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TV Action & Adventure" > <i class="fa fa-plus"></i></button>TV Action & Adventure</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="MusicVideosandConcerts"      > <i class="fa fa-plus"></i></button>Music Videos and Concerts</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TVAction&Adventure" > <i class="fa fa-plus"></i></button>TV Action & Adventure</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Musical"        > <i class="fa fa-plus"></i></button>Musical</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Parody"> <i class="fa fa-plus"></i></button>Parody</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TV Horror"      > <i class="fa fa-plus"></i></button>TV Horror</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="LGBTQ Movies"   > <i class="fa fa-plus"></i></button>LGBTQ Movies</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TVHorror"      > <i class="fa fa-plus"></i></button>TV Horror</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="LGBTQMovies"   > <i class="fa fa-plus"></i></button>LGBTQ Movies</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Arthouse"       > <i class="fa fa-plus"></i></button>Arthouse</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Game Shows"     > <i class="fa fa-plus"></i></button>Game Shows</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="History"        > <i class="fa fa-plus"></i></button>History</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id=""      > <i class="fa fa-plus"></i></button>Special Interest</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="SpecialInterest"      > <i class="fa fa-plus"></i></button>Special Interest</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Biographical"   > <i class="fa fa-plus"></i></button>Biographical</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Horror"> <i class="fa fa-plus"></i></button>Horror</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TV Sci-Fi & Fantasy"   > <i class="fa fa-plus"></i></button>TV Sci-Fi & Fantasy</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Science & Technology"  > <i class="fa fa-plus"></i></button>Science & Technology</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TVSci-Fi&Fantasy"   > <i class="fa fa-plus"></i></button>TV Sci-Fi & Fantasy</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Science&Technology"  > <i class="fa fa-plus"></i></button>Science & Technology</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Latino"> <i class="fa fa-plus"></i></button>Latino</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Anthology"      > <i class="fa fa-plus"></i></button>Anthology</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Family"> <i class="fa fa-plus"></i></button>Family</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Historical"     > <i class="fa fa-plus"></i></button>Historical</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Black Stories"  > <i class="fa fa-plus"></i></button>Black Stories</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="BlackStories"  > <i class="fa fa-plus"></i></button>Black Stories</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Sitcom"> <i class="fa fa-plus"></i></button>Sitcom</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Sci-Fi & Fantasy"      > <i class="fa fa-plus"></i></button>Sci-Fi & Fantasy</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TV Action & Adventure" > <i class="fa fa-plus"></i></button>TV Action & Adventure</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Stand-Up Comedy & Talk Shows"   > <i class="fa fa-plus"></i></button>Stand-Up Comedy & Talk Shows</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Sci-Fi&Fantasy"      > <i class="fa fa-plus"></i></button>Sci-Fi & Fantasy</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TVAction&Adventure" > <i class="fa fa-plus"></i></button>TV Action & Adventure</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Stand-UpComedy&TalkShows"   > <i class="fa fa-plus"></i></button>Stand-Up Comedy & Talk Shows</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Western"        > <i class="fa fa-plus"></i></button>Western</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Suspense"       > <i class="fa fa-plus"></i></button>Suspense</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="LGBTQ Movies"   > <i class="fa fa-plus"></i></button>LGBTQ Movies</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="LGBTQMovies"   > <i class="fa fa-plus"></i></button>LGBTQ Movies</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Family"> <i class="fa fa-plus"></i></button>Family</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Movies"> <i class="fa fa-plus"></i></button>Movies</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Young Adult Audience"  > <i class="fa fa-plus"></i></button>Young Adult Audience</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="YoungAdultAudience"  > <i class="fa fa-plus"></i></button>Young Adult Audience</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Horror"> <i class="fa fa-plus"></i></button>Horror</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Animation"      > <i class="fa fa-plus"></i></button>Animation</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Classics"       > <i class="fa fa-plus"></i></button>Classics</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Teen TV Shows"  > <i class="fa fa-plus"></i></button>Teen TV Shows</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TeenTVShows"  > <i class="fa fa-plus"></i></button>Teen TV Shows</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Dance" > <i class="fa fa-plus"></i></button>Dance</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Crime" > <i class="fa fa-plus"></i></button>Crime</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Dramas"> <i class="fa fa-plus"></i></button>Dramas</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Spanish-Language TV Shows"      > <i class="fa fa-plus"></i></button>Spanish-Language TV Shows</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Spanish-LanguageTVShows"      > <i class="fa fa-plus"></i></button>Spanish-Language TV Shows</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Reality"        > <i class="fa fa-plus"></i></button>Reality</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Comedy"> <i class="fa fa-plus"></i></button>Comedy</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Classic & Cult TV"     > <i class="fa fa-plus"></i></button>Classic & Cult TV</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Classic&Cult TV"     > <i class="fa fa-plus"></i></button>Classic & Cult TV</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Drama" > <i class="fa fa-plus"></i></button>Drama</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TV Shows"       > <i class="fa fa-plus"></i></button>TV Shows</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Adult Animation"> <i class="fa fa-plus"></i></button>Adult Animation</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Talk Show and Variety" > <i class="fa fa-plus"></i></button>Talk Show and Variety</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TV Mysteries"   > <i class="fa fa-plus"></i></button>TV Mysteries</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Horror Movies"  > <i class="fa fa-plus"></i></button>Horror Movies</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="International Movies"  > <i class="fa fa-plus"></i></button>International Movies</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="British TV Shows"      > <i class="fa fa-plus"></i></button>British TV Shows</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TVShows"       > <i class="fa fa-plus"></i></button>TV Shows</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="AdultAnimation"> <i class="fa fa-plus"></i></button>Adult Animation</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TalkShowandVariety" > <i class="fa fa-plus"></i></button>Talk Show and Variety</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TVMysteries"   > <i class="fa fa-plus"></i></button>TV Mysteries</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="HorrorMovies"  > <i class="fa fa-plus"></i></button>Horror Movies</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="InternationalMovies"  > <i class="fa fa-plus"></i></button>International Movies</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="BritishTV Shows"      > <i class="fa fa-plus"></i></button>British TV Shows</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Sports"> <i class="fa fa-plus"></i></button>Sports</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Anime" > <i class="fa fa-plus"></i></button>Anime</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Dance" > <i class="fa fa-plus"></i></button>Dance</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Game Shows"     > <i class="fa fa-plus"></i></button>Game Shows</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="GameShows"     > <i class="fa fa-plus"></i></button>Game Shows</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Suspense"       > <i class="fa fa-plus"></i></button>Suspense</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Korean TV Shows"> <i class="fa fa-plus"></i></button>Korean TV Shows</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Reality TV"     > <i class="fa fa-plus"></i></button>Reality TV</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Music & Musicals"      > <i class="fa fa-plus"></i></button>Music & Musicals</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Sketch Comedy"  > <i class="fa fa-plus"></i></button>Sketch Comedy</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TV Dramas"      > <i class="fa fa-plus"></i></button>TV Dramas</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="KoreanTVShows"> <i class="fa fa-plus"></i></button>Korean TV Shows</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="RealityTV"     > <i class="fa fa-plus"></i></button>Reality TV</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Music&Musicals"      > <i class="fa fa-plus"></i></button>Music & Musicals</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="SketchComedy"  > <i class="fa fa-plus"></i></button>Sketch Comedy</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TVDramas"      > <i class="fa fa-plus"></i></button>TV Dramas</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Arthouse"       > <i class="fa fa-plus"></i></button>Arthouse</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Teen"  > <i class="fa fa-plus"></i></button>Teen</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Music & Musicals"      > <i class="fa fa-plus"></i></button>Music & Musicals</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Spanish-Language TV Shows"      > <i class="fa fa-plus"></i></button>Spanish-Language TV Shows</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Classic Movies" > <i class="fa fa-plus"></i></button>Classic Movies</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Sci-Fi & Fantasy"      > <i class="fa fa-plus"></i></button>Sci-Fi & Fantasy</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Music&Musicals"      > <i class="fa fa-plus"></i></button>Music & Musicals</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Spanish-LanguageTVShows"      > <i class="fa fa-plus"></i></button>Spanish-Language TV Shows</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="ClassicMovies" > <i class="fa fa-plus"></i></button>Classic Movies</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Sci-Fi&Fantasy"      > <i class="fa fa-plus"></i></button>Sci-Fi & Fantasy</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Dramas"> <i class="fa fa-plus"></i></button>Dramas</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Soap Opera / Melodrama"> <i class="fa fa-plus"></i></button>Soap Opera / Melodrama</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Sports Movies"  > <i class="fa fa-plus"></i></button>Sports Movies</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Health & Wellness"     > <i class="fa fa-plus"></i></button>Health & Wellness</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="SoapOpera/Melodrama"> <i class="fa fa-plus"></i></button>Soap Opera / Melodrama</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="SportsMovies"  > <i class="fa fa-plus"></i></button>Sports Movies</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Health&Wellness"     > <i class="fa fa-plus"></i></button>Health & Wellness</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="History"        > <i class="fa fa-plus"></i></button>History</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Thriller"       > <i class="fa fa-plus"></i></button>Thriller</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Unscripted"     > <i class="fa fa-plus"></i></button>Unscripted</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Faith and Spirituality"> <i class="fa fa-plus"></i></button>Faith and Spirituality</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="FaithandSpirituality"> <i class="fa fa-plus"></i></button>Faith and Spirituality</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Series"> <i class="fa fa-plus"></i></button>Series</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Cult Movies"    > <i class="fa fa-plus"></i></button>Cult Movies</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="CultMovies"    > <i class="fa fa-plus"></i></button>Cult Movies</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Action-Adventure"      > <i class="fa fa-plus"></i></button>Action-Adventure</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="and Culture"    > <i class="fa fa-plus"></i></button>and Culture</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="andCulture"    > <i class="fa fa-plus"></i></button>and Culture</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Kids"  > <i class="fa fa-plus"></i></button>Kids</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Romantic TV Shows"     > <i class="fa fa-plus"></i></button>Romantic TV Shows</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="RomanticTVShows"     > <i class="fa fa-plus"></i></button>Romantic TV Shows</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Adventure"      > <i class="fa fa-plus"></i></button>Adventure</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Romantic Movies"> <i class="fa fa-plus"></i></button>Romantic Movies</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="RomanticMovies"> <i class="fa fa-plus"></i></button>Romantic Movies</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Latino"> <i class="fa fa-plus"></i></button>Latino</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="News"  > <i class="fa fa-plus"></i></button>News</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Docuseries"     > <i class="fa fa-plus"></i></button>Docuseries</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="LGBTQ" > <i class="fa fa-plus"></i></button>LGBTQ</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Anime Features" > <i class="fa fa-plus"></i></button>Anime Features</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TV Comedies"    > <i class="fa fa-plus"></i></button>TV Comedies</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Science & Nature TV"   > <i class="fa fa-plus"></i></button>Science & Nature TV</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="AnimeFeatures" > <i class="fa fa-plus"></i></button>Anime Features</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TVComedies"    > <i class="fa fa-plus"></i></button>TV Comedies</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Science&Nature TV"   > <i class="fa fa-plus"></i></button>Science & Nature TV</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Comedies"       > <i class="fa fa-plus"></i></button>Comedies</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TV Dramas"      > <i class="fa fa-plus"></i></button>TV Dramas</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TVDramas"      > <i class="fa fa-plus"></i></button>TV Dramas</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Anime" > <i class="fa fa-plus"></i></button>Anime</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Music" > <i class="fa fa-plus"></i></button>Music</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Reality TV"     > <i class="fa fa-plus"></i></button>Reality TV</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="RealityTV"     > <i class="fa fa-plus"></i></button>Reality TV</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Fitness"        > <i class="fa fa-plus"></i></button>Fitness</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Stand-Up Comedy & Talk Shows"   > <i class="fa fa-plus"></i></button>Stand-Up Comedy & Talk Shows</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Stand-UpComedy&Talk Shows"   > <i class="fa fa-plus"></i></button>Stand-Up Comedy & Talk Shows</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Arts"  > <i class="fa fa-plus"></i></button>Arts</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Docuseries"     > <i class="fa fa-plus"></i></button>Docuseries</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Lifestyle & Culture"   > <i class="fa fa-plus"></i></button>Lifestyle & Culture</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TV Thrillers"   > <i class="fa fa-plus"></i></button>TV Thrillers</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Stand-Up Comedy"> <i class="fa fa-plus"></i></button>Stand-Up Comedy</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Lifestyle&Culture"   > <i class="fa fa-plus"></i></button>Lifestyle & Culture</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TVThrillers"   > <i class="fa fa-plus"></i></button>TV Thrillers</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Stand-UpComedy"> <i class="fa fa-plus"></i></button>Stand-Up Comedy</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Disaster"       > <i class="fa fa-plus"></i></button>Disaster</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Entertainment"  > <i class="fa fa-plus"></i></button>Entertainment</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Thriller"       > <i class="fa fa-plus"></i></button>Thriller</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Lifestyle & Culture"   > <i class="fa fa-plus"></i></button>Lifestyle & Culture</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Action & Adventure"    > <i class="fa fa-plus"></i></button>Action & Adventure</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Anime Features" > <i class="fa fa-plus"></i></button>Anime Features</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Lifestyle&Culture"   > <i class="fa fa-plus"></i></button>Lifestyle & Culture</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Action&Adventure"    > <i class="fa fa-plus"></i></button>Action & Adventure</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="AnimeFeatures" > <i class="fa fa-plus"></i></button>Anime Features</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="LGBTQ" > <i class="fa fa-plus"></i></button>LGBTQ</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Kids' TV"       > <i class="fa fa-plus"></i></button>Kids' TV</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Young Adult Audience"  > <i class="fa fa-plus"></i></button>Young Adult Audience</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Kids'TV"       > <i class="fa fa-plus"></i></button>Kids' TV</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="YoungAdultAudience"  > <i class="fa fa-plus"></i></button>Young Adult Audience</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Musical"        > <i class="fa fa-plus"></i></button>Musical</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Drama" > <i class="fa fa-plus"></i></button>Drama</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Cult Movies"    > <i class="fa fa-plus"></i></button>Cult Movies</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="CultMovies"    > <i class="fa fa-plus"></i></button>Cult Movies</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Romance"        > <i class="fa fa-plus"></i></button>Romance</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="International Movies"  > <i class="fa fa-plus"></i></button>International Movies</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="InternationalMovies"  > <i class="fa fa-plus"></i></button>International Movies</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Thrillers"      > <i class="fa fa-plus"></i></button>Thrillers</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Late Night"     > <i class="fa fa-plus"></i></button>Late Night</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="LateNight"     > <i class="fa fa-plus"></i></button>Late Night</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Documentary"    > <i class="fa fa-plus"></i></button>Documentary</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Arts"  > <i class="fa fa-plus"></i></button>Arts</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Crime TV Shows" > <i class="fa fa-plus"></i></button>Crime TV Shows</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="CrimeTVShows" > <i class="fa fa-plus"></i></button>Crime TV Shows</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Documentaries"  > <i class="fa fa-plus"></i></button>Documentaries</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Adventure"      > <i class="fa fa-plus"></i></button>Adventure</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Romantic TV Shows"     > <i class="fa fa-plus"></i></button>Romantic TV Shows</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TV Sci-Fi & Fantasy"   > <i class="fa fa-plus"></i></button>TV Sci-Fi & Fantasy</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="International TV Shows"> <i class="fa fa-plus"></i></button>International TV Shows</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="RomanticTVShows"     > <i class="fa fa-plus"></i></button>Romantic TV Shows</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TVSci-Fi&Fantasy"   > <i class="fa fa-plus"></i></button>TV Sci-Fi & Fantasy</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="InternationalTVShows"> <i class="fa fa-plus"></i></button>International TV Shows</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Survival"       > <i class="fa fa-plus"></i></button>Survival</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Classics"       > <i class="fa fa-plus"></i></button>Classics</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Comedy"> <i class="fa fa-plus"></i></button>Comedy</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Cartoons"       > <i class="fa fa-plus"></i></button>Cartoons</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Biographical"   > <i class="fa fa-plus"></i></button>Biographical</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TV Horror"      > <i class="fa fa-plus"></i></button>TV Horror</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="TVHorror"      > <i class="fa fa-plus"></i></button>TV Horror</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Medical"        > <i class="fa fa-plus"></i></button>Medical</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Cartoons"       > <i class="fa fa-plus"></i></button>Cartoons</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Lifestyle"      > <i class="fa fa-plus"></i></button>Lifestyle</li>
@@ -300,17 +313,17 @@
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Thrillers"      > <i class="fa fa-plus"></i></button>Thrillers</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Mystery"        > <i class="fa fa-plus"></i></button>Mystery</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Reality"        > <i class="fa fa-plus"></i></button>Reality</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Animals & Nature"      > <i class="fa fa-plus"></i></button>Animals & Nature</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Animals&Nature"      > <i class="fa fa-plus"></i></button>Animals & Nature</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Unscripted"     > <i class="fa fa-plus"></i></button>Unscripted</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Buddy" > <i class="fa fa-plus"></i></button>Buddy</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="International TV Shows"> <i class="fa fa-plus"></i></button>International TV Shows</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Special Interest"      > <i class="fa fa-plus"></i></button>Special Interest</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="InternationalTVShows"> <i class="fa fa-plus"></i></button>International TV Shows</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="SpecialInterest"      > <i class="fa fa-plus"></i></button>Special Interest</li>
                                           <li><button type="button" class="btn btn-secondary btn-sm"id="Kids"  > <i class="fa fa-plus"></i></button>Kids</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Crime TV Shows" > <i class="fa fa-plus"></i></button>Crime TV Shows</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Game Show / Competition"        > <i class="fa fa-plus"></i></button>Game Show / Competition</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Science & Technology"  > <i class="fa fa-plus"></i></button>Science & Technology</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Children & Family Movies"       > <i class="fa fa-plus"></i></button>Children & Family Movies</li>
-                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Stand-Up Comedy"> <i class="fa fa-plus"></i></button>Stand-Up Comedy </li>  
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="CrimeTVShows" > <i class="fa fa-plus"></i></button>Crime TV Shows</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="GameShow/Competition"        > <i class="fa fa-plus"></i></button>Game Show / Competition</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Science&Technology"  > <i class="fa fa-plus"></i></button>Science & Technology</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Children&Family Movies"       > <i class="fa fa-plus"></i></button>Children & Family Movies</li>
+                                          <li><button type="button" class="btn btn-secondary btn-sm"id="Stand-UpComedy"> <i class="fa fa-plus"></i></button>Stand-Up Comedy </li>  
               </div>
               </div>
                 </div>

@@ -47,19 +47,19 @@
     <tbody>
     {% for row in results %}
     <tr>
-        <td> {{ row.type }}                 </td>
-        <td> {{ row.title }}                </td>
-        <td> {{ row.description }}          </td>
-        <td> {{ row.genres }}               </td>
-        <td> {{ row.director}}              </td>
-        <td> {{ row.cast }}                 </td>
-        <td> {{ row.locations }}            </td>
-        <td> {{ row.date_added }}           </td>
-        <td> {{ row.release_year }}         </td>
-        <td> {{ row.rating }}               </td>
-        <td> {{ row.film_duration }}        </td>
-        <td> {{ row.number_of_seasons }}    </td>
-        <td> {{ row.present_in }}           </td>
+        <td> {{ row.type }}                     </td>
+        <td> {{ row.title }}                    </td>
+        <td> {{ row.description }}              </td>
+        <td> {{ row.genres }}                   </td>
+        <td> {{ row.director}}                  </td>
+        <td> {{ row.cast }}                     </td>
+        <td> {{ row.locations }}                </td>
+        <td> {{ row.date_added }}               </td>
+        <td> {{ row.release_year }}             </td>
+        <td class="rating"> {{ row.rating }}    </td>
+        <td> {{ row.film_duration }}            </td>
+        <td> {{ row.number_of_seasons }}        </td>
+        <td> {{ row.present_in }}               </td>
         <td style="width: 200px">
             <form method="post"  action="/query/show_update">
                 <input type="hidden" name="title"  value="{{row.title}}" />

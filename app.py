@@ -16,8 +16,9 @@ def hello_world():
 @app.route("/query/find_by_type", methods=['POST'])
 def find_by_type():
     if request.method == 'POST':
-        name = request.form['type']
-        global_param.query_result = query.filter_by_type(name)
+        type = request.form['type']
+        global_param.query_result = query.filter_by_type(type)
+        global_param.title = "Ricerca " + type
         global_param.number_of_pages = int(len(global_param.query_result) / global_param.limit) + 1
         return render_template('/query.html', results=global_param.query_result[0:11],
                                size=len(global_param.query_result), title=global_param.title, page=1,
@@ -49,7 +50,8 @@ def update():
     genres = request.form["genres"]
     present_in = request.form["present_in"]
 
-    res = query.modify(type, title, director, cast, locations, date_added, release_year, rating, genres,description, present_in)
+    res = query.modify(type, title, director, cast, locations, date_added, release_year, rating, genres, description,
+                       present_in)
     return render_template('/index.html')
 
 
@@ -58,6 +60,7 @@ def find_by_genre():
     if request.method == 'POST':
         genre = request.form['genre']
         global_param.query_result = query.find_by_genres(genre)
+        global_param.title = "Ricerca per genere " + genre
         global_param.number_of_pages = int(len(global_param.query_result) / global_param.limit) + 1
         return render_template('/query.html', results=global_param.query_result[0:11],
                                size=len(global_param.query_result), title=global_param.title, page=1,

@@ -121,4 +121,16 @@ function formatDate(date) {
     return formattedDate;
 }
 
+function disableFields() {
+    let elem = $('#typeIns').find(":selected").val();
+    if(elem === "Movie"){
+        $("#film_duration").prop('disabled', false);
+        $("#number_of_seasons").prop('disabled', true);
+    } else{
+        $("#film_duration").prop('disabled', true);
+        $("#number_of_seasons").prop('disabled', false);
+    }
+
+}
+
   

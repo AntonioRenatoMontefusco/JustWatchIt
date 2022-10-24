@@ -12,12 +12,6 @@ def find_by_genres(genre):
 
 
 def find_by_title(title):
-    # return list(
-    #   collection.aggregate([
-    #      {"$match": {"title": {"$regex": ".*" + title + ".*", "$options": "i"}}},
-    #      {"$lookup": {"from": "rating", "localField": "rating", "foreignField":{"$toString": "id"}, "as": "rating"}}
-    # ])
-    # )
     return list(collection.find({"title": {"$regex": ".*" + title + ".*", "$options": "i"}}))
 
 
@@ -94,20 +88,12 @@ def find_film_by_at_least_duration(duration):
     return collection.find({"type": "Movie", "film_duration": {"$lte": duration}})
 
 
-def find_by_year_range(min_year, max_year):
-    return list(collection.find({"release_year": {"$gte": min_year, "$lte": max_year}}))
-
-
 def find_by_year(year):
     return list(collection.find({"release_year": year}))
 
 
 def find_by_cast(cast):
     return collection.find({"cast": {"$regex": ".*" + cast + ".*"}})
-
-
-def find_by_genres(genre):
-    return list(collection.find({"genres": {'$regex': ".*" + genre + ".*", "$options": "i"}}))
 
 
 def find_orderby_date(order):
@@ -117,10 +103,3 @@ def find_orderby_date(order):
 def find_orderby_date_limited(order, limit, page):
     result = collection.find().sort("release_year", int(order)).skip(limit*page).limit(limit)
     return list(result)
-
-
-def find_by_rating_less_than(age):
-    db = collection.find()
-    for row in list(db):
-        if "G" in row['rating']:
-            print('mammt')

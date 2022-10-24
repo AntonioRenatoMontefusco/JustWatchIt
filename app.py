@@ -55,6 +55,27 @@ def update():
     return render_template('/index.html')
 
 
+@app.route("/query/insert", methods=['POST'])
+def insert():
+    type = request.form["type"]
+    title = request.form["title"]
+    description = request.form["description"]
+    director = request.form["director"]
+    cast = request.form["cast"]
+    locations = request.form["locations"]
+    date_added = request.form["date_added"]
+    release_year = request.form["release_year"]
+    rating = request.form["rating"]
+    film_duration = request.form["film_duration"]
+    number_of_seasons = request.form["number_of_seasons"]
+    genres = request.form["genres"]
+    present_in = request.form["present_in"]
+
+    res = query.insert(type, title, director, cast, locations, date_added, release_year, rating, genres, description,
+                       present_in)
+    return render_template('/index.html')
+
+
 @app.route("/query/find_by_genre", methods=['POST'])
 def find_by_genre():
     if request.method == 'POST':

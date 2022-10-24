@@ -200,14 +200,15 @@
         </div>
         <div id="form-container">
             <form
-                    action="/query/insert_game"
+                    action="/query/insert"
                     method="post"
                     style="display: flex; flex-direction: column; margin-bottom: 30px"
+                    id="theForm"
             >
                 <div style="display: flex; flex-direction: row">
                     <div class="form-fields">
                         <label class="label-form" for="type">Tipologia</label>
-                        <select class="text-field" id="type" name="type" required>
+                        <select class="text-field" id="typeIns" name="type" required onchange="disableFields()">
                             <option value="Movie">Movie</option>
                             <option value="Serie TV">Serie TV</option>
                         </select>
@@ -233,7 +234,7 @@
                         <input type="date" class="text-field text-field-upd" id="date_added" name="date_added"><br>
 
                         <label class="label-form" for="n_rev">Anno di uscita</label>
-                        <input type="number" class="text-field" id="year" name="year" min="1950" step="1"/><br/>
+                        <input type="number" class="text-field" id="year" name="release_year" min="1950" step="1"/><br/>
 
                         <label class="label-form" for="rating">Rating</label>
                         <select name="rating" class="text-field" id="rating" required>
@@ -250,12 +251,15 @@
                         <br>
 
                         <label class="label-form" for="n_rev">Durata del film</label>
-                        <input type="number" class="text-field" id="duration" name="duration" /><br/>
+                        <input type="number" class="text-field" id="film_duration" name="film_duration" /><br/>
 
                         <label class="label-form" for="n_rev">Numero di stagioni</label>
-                        <input type="number" class="text-field" id="seasons" name="seasons" /><br/>
+                        <input type="number" class="text-field" id="number_of_seasons" name="number_of_seasons" disabled /><br/>
 
-                        <div class="container" >
+
+            </div>
+            </div>
+                <div class="container" >
               <div class="row">
               <div class="col-md-6">
                 <h2>Platforms</h2>
@@ -500,10 +504,10 @@
                 </div>
               </div>
               </div>
-                    </div>
+            <input type="hidden" id="genresValue" value="" name= "genres">
+            <input type="hidden" id="platformsValue" value="" name= "present_in">
 
-                </div>
-                <button type="submit" class="query-button">Inserisci</button>
+                <button type="submit" class="query-button" id = "submitButton">Inserisci</button>
             </form>
         </div>
     </div>

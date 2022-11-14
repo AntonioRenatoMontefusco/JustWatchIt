@@ -46,9 +46,9 @@
 <!-- Intro -->
 <div id="home">
     <div id="content">
-        <div style="margin-left:-360px">
+        <div style="margin-left:-210px">
             <img
-                    width="1200"
+                    width="800"
                     src="../static/style/image.svg"
             />
         </div>
@@ -131,7 +131,7 @@
         <div class="query-title">Ricerca per range di anno</div>
         <h4 class="info-box"> Ricerca di film o serie tv con anno di uscita compreso fra i valori specificati</h4>
         <form action="/query/find_by_year_range" method="post">
-            <div class="query-1">
+            <div class="query-1" style="!important; flex-direction: row">
                 <div class="form-row">
                     <div class="form-text">Min</div>
                     <input type="number" class="text-field" min="1950" max="2100" step="1" name="min_year" required/>
@@ -140,7 +140,7 @@
                     <div class="form-text">Max</div>
                     <input type="number" class="text-field" min="1950" max="2100" step="1" name="max_year" required/>
                 </div>
-                <button type="submit" class="query-button">Ricerca</button>
+                <button type="submit" class="query-button" style="!important; margin-left: 31px ;margin-top: 2px">Ricerca</button>
             </div>
         </form>
     </div>

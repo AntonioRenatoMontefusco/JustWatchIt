@@ -201,6 +201,7 @@ def find_orderby_date():
         return render_template('/query.html', results=global_param.query_result[0:11],
                                size=len(global_param.query_result), title=global_param.title, page=1,
                                max_pages=global_param.number_of_pages)
+    return;
     return json.dumps({"ok": True})
 
 
